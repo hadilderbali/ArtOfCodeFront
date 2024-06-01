@@ -53,8 +53,7 @@ const routes: Routes = [
   {path: 'create-job-offer',
    component:CreateJobOfferComponent},
   
-   {path: 'create-job-offer',
-   component:CreateJobOfferComponent},
+
   {path: '', redirectTo: 'joboffers',
    pathMatch: 'full'},
 {

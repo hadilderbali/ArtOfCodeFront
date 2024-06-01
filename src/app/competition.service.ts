@@ -19,32 +19,43 @@ export class CompetitionService {
     return this.httpClient.get<Competition[]>(`${this.baseURL}` + `competition/all` ,{headers});
   }
   addCompetition(competition: Competition): Observable<Object>{
-    return this.httpClient.post(`${this.baseURL}`+`competition/addCompetition`, competition);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.post(`${this.baseURL}`+`competition/addCompetition`, competition,{headers});
   }
   
 
   searchCompetitions(keyword: string): Observable<Competition[]> {
-    return this.httpClient.get<Competition[]>(`${this.baseURL}competition/search?keyword=${keyword}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.get<Competition[]>(`${this.baseURL}competition/search?keyword=${keyword}`, {headers});
 }
 
  
   DeleteCompetition(id: number){
-    return this.httpClient.delete(`${this.baseURL}`+`competition/deleteCompetition/${id}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.delete(`${this.baseURL}`+`competition/deleteCompetition/${id}`,{headers});
   }
   getCategoryTitle(categoryId: number): Observable<string> {
-    return this.httpClient.get<string>(`${this.baseURL}/categories/${categoryId}/title`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.get<string>(`${this.baseURL}/categories/${categoryId}/title`,{headers});
   }
   public updatecompetition(id: number, a: Competition){
-    return this.httpClient.put(`${this.baseURL}`+`competition/updateCompetition/${id}`,a);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.put(`${this.baseURL}`+`competition/updateCompetition/${id}`,a,{headers});
   }
   public getcompetitionbyid(id:number){
-    return this.httpClient.get<Competition>(`${this.baseURL}`+`competition/getbyid/${id}`)
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.get<Competition>(`${this.baseURL}`+`competition/getbyid/${id}`,{headers})
   }
   
 getEventsPaged(page: number, pageSize: number): Observable<any> {
   
     const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
-  console.log('HELLLO',localStorage.getItem("access_token"))
   const url = `${this.baseURL}competition/pagedd?page=${page}&pageSize=${pageSize}`;
   return this.httpClient.get<any>(url,{headers});
 }
