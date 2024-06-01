@@ -1,0 +1,5 @@
+.custom-login-image {
+    background-image: url('/src/assets/BackOffice/img/login.jpg');
+    background-size: cover;
+    background-position: center;
+}

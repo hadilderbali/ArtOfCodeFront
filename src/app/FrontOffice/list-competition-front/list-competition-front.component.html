@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DanceScape Explorer</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/FrontOffice/assets/img/logo.png">
+  <link rel="apple-touch-icon" href="/assets/FrontOffice/assets/img/apple-touch-icon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/FrontOffice/assets/css/main.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .form-container {
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group label {
+      font-weight: 600;
+    }
+
+    .btn-submit {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: #45a049;
+    }
+    .poster-container {
+    width: 100%;
+    height: 500px; /* Set the height of the poster image container */
+    overflow: hidden; /* Hide overflowing parts of the image */
+}
+.poster-container img {
+  max-height: 500px; /* Set your desired maximum height */
+}
+.search-container {
+  position: relative;
+  display: inline-block;
+}
+
+.search-container {
+  text-align: center;
+}
+
+.center-input {
+  display: inline-block;
+  text-align: left;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+  outline: none;
+}
+  </style>
+</head>
+<body>
+
+  <app-header-front></app-header-front>
+  <div class="card bg-transparent border rounded-3">
+    <!-- Card header START -->
+    <div class="card-header bg-transparent border-bottom">
+      <h3 class="mb-0"></h3>
+       
+    </div>
+    <!-- Card header END -->
+  
+    <!-- Card body START -->
+    <div class="card-body p-3 p-md-4">
+      <div class="row g-4">
+        <div></div>
+        <br>
+        <br>
+
+        <h3 align="center">Welcome to DanceScape Explorer's On-going competitions!</h3>
+        <div class="search-container">
+          <input  type="text" placeholder="Enter Competition Name Here" [(ngModel)]="searchTerm" (input)="search()">
+        </div>
+  <div class="col-sm-6 col-lg-4" *ngFor="let event of eventList">
+    
+    
+    <div class="card shadow h-100">
+      <!-- Boutons de modification et de suppression -->
+      <div class="d-flex justify-content-end mb-2">
+       
+      </div>
+      <!-- Image -->
+      <div class="poster-container">
+
+      <img src="assets/{{event.picture}}" class="card-img card-img-top" alt="course image" >
+    </div>
+
+
+      <div class="card-body pb-0">
+        <!-- Badge and favorite -->
+        <div class="d-flex justify-content-between mb-2">
+          <a href="#" class="badge bg-success bg-opacity-10 text-success">{{ event.competitionName }}</a>
+        </div>
+
+        <!-- Title -->
+        <h5 class="card-title fw-normal"><a href="#"> </a></h5>
+        <h5 class="mb-2 text-truncate-2"><b>{{ event.description }}</b></h5>
+       
+      </div>
+      <!-- Rating -->
+      <div class="card-footer pt-0 pb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="h6 fw-light mb-0">
+            <i class="far fa-clock text-danger me-2"></i>
+            <h6>Make sure to sign up before:</h6>
+            <b>{{ event.deadline | date: 'mediumDate' }} at {{ event.hour }}</b>
+          </span>
+         
+        </div>
+        <button (click)="Candidature(event.idCompetition, event.expired)"style="background-color: #8B0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Participate Now!</button>
+
+
+      </div>
+    </div>
+    
+  </div>
+    
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="prevPage()">Previous</button>
+      </li>
+      <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+        <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="nextPage()">Next</button>
+      </li>
+    </ul>
+  </nav>
+      </div></div></div>
+  <app-footer-front></app-footer-front>
+  
+  <!-- Vendor JS Files -->
+  <script src="/assets/FrontOffice/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/php-email-form/validate.js"></script>
+  
+  <!-- Template Main JS File -->
+  <script src="/assets/FrontOffice/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DanceScape Explorer</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/FrontOffice/assets/img/logo.png">
+  <link rel="apple-touch-icon" href="/assets/FrontOffice/assets/img/apple-touch-icon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/FrontOffice/assets/css/main.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .form-container {
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group label {
+      font-weight: 600;
+    }
+
+    .btn-submit {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: #45a049;
+    }
+    .disclaimer {
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.disclaimer h2 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.disclaimer ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+  </style>
+</head>
+<body>
+
+  <app-header-front></app-header-front>
+  <div class="card bg-transparent border rounded-3">
+    <!-- Card header START -->
+    <div class="card-header bg-transparent border-bottom">
+        <div class="form-container">
+          <br>
+          <br>
+          <br>
+          <h2 align="center">Submit your Candidacy video down below</h2>
+
+          <br>
+          <br>
+          <br>
+          <br>
+
+          <div class="disclaimer">
+            <h2>Important Information for Video Uploads</h2>
+            <p>
+              To ensure a fair and smooth judging process, please follow these guidelines for your dance video submissions:
+            </p>
+            <ul>
+              <li>**Clear Video Quality:**  Record your video in a well-lit environment with clear audio. Ensure your entire body is visible throughout the performance.</li>
+              <li>**Video Length:**  Keep your video submissions concise! Videos should not exceed 3 minutes in length. 
+            </li>
+              <li>**Music Editing:**  **Do not** rely on the web app to play background music. Please edit your dance video to include the desired music directly within the video file itself. This ensures compatibility and avoids potential playback issues.</li>
+            </ul>
+            <p>By following these guidelines, you'll showcase your talent in the best possible light! Good luck!</p>
+          </div>
+          
+            <form (ngSubmit)="onSubmit()" class="pretty-form">
+        
+              
+        
+            
+        
+                <div class="form-group">
+                    <label for="image">Choose the correct candidacy video and upload it: </label>
+                    <input class="btn btn-primary-soft mb-0" for="uploadfile-1" type="file" class="form-control" id="image" [(ngModel)]="competition.video" name="price" required>
+
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <button style="background-color: #8B0000; color: white; display: block;  border-radius: 5px; margin: 0 auto;cursor: pointer;" type="submit" >Submit Candidacy</button>
+              </form>
+        </div>
+    </div>
+    <!-- Card header END -->
+  
+    <!-- Card body START -->
+    <div class="card-body p-3 p-md-4">
+      <div class="row g-4">
+ 
+   
+      </div></div></div>
+  <app-footer-front></app-footer-front>
+  
+  <!-- Vendor JS Files -->
+  <script src="/assets/FrontOffice/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/php-email-form/validate.js"></script>
+  
+  <!-- Template Main JS File -->
+  <script src="/assets/FrontOffice/assets/js/main.js"></script>
+</body>
+</html>

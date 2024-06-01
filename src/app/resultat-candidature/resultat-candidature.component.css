@@ -1,0 +1,41 @@
+/* CSS pour le tableau */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* Style de l'en-tête du tableau */
+  .table th {
+    background-color: #5a645a;
+    color: white;
+    font-weight: bold;
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 2px solid #fff;
+  }
+  
+  /* Style des lignes impaires du tableau */
+  .table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Style des cellules du tableau */
+  .table td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Style pour les cellules de la première colonne */
+  .table td:first-child {
+    font-weight: bold;
+  }
+  
+  /* Animation au survol */
+  .table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  

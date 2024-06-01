@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Profile</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .custom-file-label::after {
+      content: "Choisir un fichier";
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="text-center">Add Profile</h2>
+    <form id="profileForm" class="profile-form">
+      <div class="form-group">
+        <label for="fileInput">Photo de profil:</label>
+        <div class="custom-file">
+          <input type="file" id="fileInput" class="custom-file-input">
+          <label class="custom-file-label" for="fileInput"></label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="musicpref">Music Preference:</label>
+        <input type="text" id="musicpref" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="dancemusicpref">Dance Music Preference:</label>
+        <input type="text" id="dancemusicpref" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="will">Will:</label>
+        <input type="text" id="will" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="aboutMe">About Me:</label>
+        <textarea id="aboutMe" class="form-control"></textarea>
+      </div>
+      <div class="text-center">
+        <button id="submitButton" class="btn btn-primary" type="submit" disabled>Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    // Enable submit button when file is selected
+    document.getElementById('fileInput').addEventListener('change', function() {
+      var fileName = this.files[0].name;
+      var label = document.querySelector('.custom-file-label');
+      label.textContent = fileName;
+      document.getElementById('submitButton').disabled = false;
+    });
+  </script>
+</body>
+
+</html>

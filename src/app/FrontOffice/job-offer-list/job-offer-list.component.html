@@ -1,0 +1,31 @@
+<h1>JobOffer List</h1>
+<table table class = "table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Number</th>
+            <th>Description</th>
+            <th>DatePost</th>
+            <th>Email</th>
+            <th>image</th>
+            <th>SalaryRange</th>
+            <th>JobType</th>
+        </tr>
+    </thead>
+   <tbody>
+    <tr *ngFor="let jobs of joboffers">
+        <td>{{jobs.Title}}</td>
+        <td>{{jobs.Location}}</td>
+        <td>{{jobs.Number}}</td>
+        <td>{{jobs.Description}}</td>
+        <td>{{jobs.DatePost}}</td>
+        <td>{{jobs.Email}}</td>
+        <td>{{jobs.image}}</td>
+        <td>{{jobs.SalaryRange}}</td>
+        <td>{{jobs.JobType}}</td>
+
+    
+        </tr>
+   </tbody> 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
