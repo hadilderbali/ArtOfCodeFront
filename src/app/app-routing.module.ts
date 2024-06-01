@@ -24,6 +24,13 @@ import { ShowUsersComponent } from './User/ShowUsers/showusers/showusers.compone
 import { RegisterconfirmationComponent } from './User/registerconfirmation/registerconfirmation.component';
 import { ProfileComponent } from './User/profile/profile.component';
 import { MyprofileComponent } from './User/myprofile/myprofile.component';
+import { ViewTutorialComponent } from './BackOffice/view-tutorial/view-tutorial.component';
+import { AddTutorialComponent } from './BackOffice/add-tutorial/add-tutorial.component';
+import { UpdateTutorialComponent } from './BackOffice/update-tutorial/update-tutorial.component';
+import { ViewReclamationComponent } from './BackOffice/view-reclamation/view-reclamation.component';
+import { AddReclamationComponent } from './BackOffice/add-reclamation/add-reclamation.component';
+import { UpdateReclamationComponent } from './BackOffice/update-reclamation/update-reclamation.component';
+import { StatisticsReclamationComponent } from './BackOffice/statistics-reclamation/statistics-reclamation.component';
 const routes: Routes = [
 
 {
@@ -52,7 +59,18 @@ const routes: Routes = [
  component:UpdatecompetitionComponent},
   {path: 'create-job-offer',
    component:CreateJobOfferComponent},
-  
+   {path: 'view-tutorial',
+   component:ViewTutorialComponent},
+   {path:"view-tutorial/add-tutorial",component:AddTutorialComponent},
+   {path:'update-tutorial/:id',
+   component:UpdateTutorialComponent},
+   {path: 'view-reclamation',
+   component:ViewReclamationComponent},
+   {path:"view-reclamation/add-reclamation",component:AddReclamationComponent},
+   {path:'update-reclamation/:id',
+   component:UpdateReclamationComponent},
+   {path: 'statistics-reclamation',
+   component:StatisticsReclamationComponent},
 
   {path: '', redirectTo: 'joboffers',
    pathMatch: 'full'},

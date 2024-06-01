@@ -43,6 +43,18 @@ import { ProfileComponent } from './User/profile/profile.component';
 import { MyprofileComponent } from './User/myprofile/myprofile.component';
 import { UserSearchComponent } from './User/user-search/user-search.component';
 import { AuthNavbarComponent } from './Services/auth-navbar/auth-navbar.component';
+import { ViewTutorialComponent } from './BackOffice/view-tutorial/view-tutorial.component';
+import { AddTutorialComponent } from './BackOffice/add-tutorial/add-tutorial.component';
+import { UpdateTutorialComponent } from './BackOffice/update-tutorial/update-tutorial.component';
+import { ViewReclamationComponent } from './BackOffice/view-reclamation/view-reclamation.component';
+import { AddReclamationComponent } from './BackOffice/add-reclamation/add-reclamation.component';
+import { UpdateReclamationComponent } from './BackOffice/update-reclamation/update-reclamation.component';
+import { StatisticsReclamationComponent } from './BackOffice/statistics-reclamation/statistics-reclamation.component';
+import { FilterPipe } from './filter.pipe';
+import { AddReclamationFrontComponent } from './FrontOffice/add-reclamation-front/add-reclamation-front.component';
+import { ViewTutorialFrontComponent } from './FrontOffice/view-tutorial-front/view-tutorial-front.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
 
 // Créez une fonction qui renvoie un TranslateHttpLoader pour charger les fichiers de langue
@@ -83,7 +95,18 @@ const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
     MyprofileComponent,
     UserSearchComponent,
     AuthNavbarComponent,
-
+    AddTutorialComponent,
+    ViewTutorialComponent,
+    UpdateTutorialComponent,
+    ViewTutorialFrontComponent,
+    AddReclamationComponent,
+    ViewReclamationComponent,
+    UpdateReclamationComponent,
+  
+    AddReclamationFrontComponent,
+ 
+    StatisticsReclamationComponent,
+      FilterPipe,
     
   ],
   imports: [
@@ -93,6 +116,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
     FormsModule,
     ReactiveFormsModule,
     SocketIoModule.forRoot(config),
+    NgxPaginationModule,
+    Ng2SearchPipeModule
      
   ],
   providers: [WebsocketService],

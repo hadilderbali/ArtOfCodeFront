@@ -1,11 +1,5 @@
 <!-- ======= Header ======= -->
-<style>
-  .logout_button:hover{
-    background-color: gray;
-    color: white;
-  }
-</style>
-<header id="header" class="header d-flex align-items-center">
+<header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
@@ -16,33 +10,25 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a [href]="'/myprofile/' + id">My Profile</a></li>
-
-
-          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="competition.html">Competitions</a></li>
+          <li><a href="view-tutorial-front">Tutorials</a></li>
           <li><a href="events.html">Events</a></li>
-          <li><a href="/competition-listFront">Competitions</a></li>
-
-          <li><a href="/create-job-offer">Recruitment</a></li>
+          <li><a href="recruitment.html">Recruitment</a></li>
           <li><a href="clubs.html">Clubs</a></li>
           <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="blog.html">Blog</a></li>
               
-              <li><a href="reclamation.html">Reclamation</a></li>
+              <li><a href="add-reclamation-front">Reclamation</a></li>
              
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
-          <app-user-search class="ms-2"/>
         </ul>
-      </nav>
-      <button class="btn d-flex align-items-center logout_button ms-2" (click)="logout()">
-        <i class="fa-solid fa-right-from-bracket me-1"></i>
-    
-        Logout
-      </button>
+      </nav><!-- .navbar -->
 
+      <a class="btn-login" href="#">Log in</a>
+      <a class="btn-signup" href="#">Sign up</a>
 
       
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>

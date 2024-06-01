@@ -1,0 +1,65 @@
+<div class="card">
+  <div class="card-body">
+    <div >
+      <h1 style="text-align: center;">All Reclamations</h1>
+
+      <!-- Topbar Search -->
+      <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+          <input type="search" [(ngModel)]="searchText" name="searchText" id="form1" class="form-control" placeholder="Search" aria-label="search" />
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+        <br>
+      </form>
+
+      <!-- Table pour afficher les réclamations -->
+      <table class="table ">
+        <thead class="thead-dark">
+          
+            <tr>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Sentiment</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reclamation of reclamations | paginate: { itemsPerPage: 6, currentPage: p } | filter: searchText ">
+              <td>{{ reclamation.type }}</td>
+              <td>{{ reclamation.description }}</td>
+              <td>{{ reclamation.dateCreation }}</td>
+              <td>{{ reclamation.reclamationStatus }}</td>
+              <td>
+                {{ reclamation.sentiment }}
+                <!-- Utiliser ngIf pour afficher l'émoticône correspondant au sentiment -->
+                <span *ngIf="reclamation.sentiment === 'Positive'">😊</span>
+                <span *ngIf="reclamation.sentiment === 'Negative'">😞</span>
+                <span *ngIf="reclamation.sentiment === 'Neutral'">😐</span>
+              </td>
+              <td>
+                <button type="button" (click)="deleteReclamation(reclamation.reclamationId)" class="btn btn-outline-danger mx-2">
+                  <i class="fas fa-trash-alt"></i> <!-- Icône de corbeille -->
+                </button>
+                <button type="button" (click)="update(reclamation.reclamationId)" class="btn btn-outline-success">
+                  <i class="fas fa-edit"></i> <!-- Icône de modification -->
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    
+
+      <!-- Placer la directive pagination-controls à droite de la page -->
+      <div style="text-align: right;">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+

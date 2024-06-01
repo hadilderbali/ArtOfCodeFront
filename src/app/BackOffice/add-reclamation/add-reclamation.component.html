@@ -1,0 +1,93 @@
+
+
+
+<div class="separator"></div>
+<div class="card">
+  <div class="card-body"> 
+<body>
+  
+  <div class="form-container">
+    <h1 style="text-align: center;">Add tutorial</h1>
+   
+    <form [formGroup]="reclamationForm" (ngSubmit)="addReclamationCompetiton() ">
+      <div class="form-group">
+        <label>Types:</label>
+        <div *ngFor="let type of reclamationTypes">
+          <label class="checkbox-label">
+            <input type="checkbox" [value]="type" (change)="toggleTypeSelection(type)" [checked]="typeFormArray.value.includes(type)">
+            {{ type }}
+          </label>
+        </div>
+        <div *ngIf="typeFormArray.invalid && typeFormArray.touched" class="text-danger">
+          Select at least one type.
+        </div>
+      </div>
+      
+      
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" formControlName="description" class="form-control" id="description">
+        <div *ngIf="reclamationForm.get('description')?.invalid && reclamationForm.get('description')?.touched" class="text-danger">
+          Description is required (3-10000 characters).
+        </div>
+        
+      </div>
+
+      <div class="form-group">
+        <label for="dateCreation">Date of Creation:</label>
+        <input type="datetime-local" formControlName="dateCreation" class="form-control" id="dateCreation">
+      </div>
+      
+
+
+  
+      <div class="form-group">
+        <label for="reclamationStatus">ReclamationStatus:</label>
+        <select formControlName="reclamationStatus" class="form-control" id="reclamationStatus">
+          <option *ngFor="let reclamationStatus of reclamationStatus" [value]="reclamationStatus">{{reclamationStatus}}</option>
+        </select>
+      </div>
+
+      <div class="separator1"></div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary custom-gradient-button">Add</button>
+
+        <span class="button-space"></span>
+       <!--bouton pour annuler la modification-->
+       <button type="button " (click)="cancelEdit" *ngIf="selectedReclamation" class="btn bnt-secondary">Cancel</button>
+      </div>
+    </form>
+  </div>
+ 
+   
+ <!-- Modal Success Message -->
+<div class="modal" id="successModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Reclamation Added Successfully!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Your reclamation has been added successfully.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+ 
+
+
+  
+
+
+
+

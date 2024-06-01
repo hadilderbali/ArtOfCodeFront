@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-all-template-front',
@@ -6,8 +6,5 @@ import { Component,OnInit } from '@angular/core';
   styleUrls: ['./all-template-front.component.css']
 })
 export class AllTemplateFrontComponent {
-  ngOnInit(): void {
-    console.log("token",localStorage.getItem("access_token"))
-  }
 
 }

@@ -1,0 +1,32 @@
+/* Style du champ de description */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Permettre le redimensionnement vertical */
+  }
+  
+  /* Style du champ de description lorsqu'il obtient le focus */
+  .form-control:focus {
+    outline: none;
+    border-color: #007bff; /* Couleur de la bordure lors du focus */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2); /* Effet de mise en évidence */
+  }
+  
+  /* Style du message d'erreur */
+  .text-danger {
+    color: #dc3545; /* Couleur du texte en cas d'erreur */
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  /* Redimensionner le champ de description pour les petits écrans */
+  @media (max-width: 768px) {
+    .form-control {
+      font-size: 14px;
+    }
+  }
+  

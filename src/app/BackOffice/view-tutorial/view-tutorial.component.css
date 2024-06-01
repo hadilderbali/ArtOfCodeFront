@@ -1,0 +1,38 @@
+/* In your component's styles file or style metadata */
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    /* Add margin-left to move the button to the far right */
+    margin-left: auto;
+  }
+  
+  .button-link:hover {
+    background-color: #45a049;
+  }
+
+  /* Style personnalisé pour le bouton avec dégradé */
+.custom-gradient-button {
+  /* Ajoutez votre dégradé personnalisé en utilisant linear-gradient */
+  background: linear-gradient(to bottom, #8B0000, #4B0082);
+  color: #fff; /* Couleur du texte */
+  border: none; /* Supprimez la bordure du bouton */
+  border-radius: 5px; /* Ajoutez un léger arrondi aux coins */
+  padding: 10px 20px; /* Espace intérieur du bouton */
+  font-weight: bold; /* Texte en gras */
+  transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+/* Au survol du bouton, changez la couleur du dégradé */
+.custom-gradient-button:hover {
+  background: linear-gradient(to bottom, #6B0000, #3B0082);
+}

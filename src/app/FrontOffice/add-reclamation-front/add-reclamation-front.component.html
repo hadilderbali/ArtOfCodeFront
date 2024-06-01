@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DanceScape Explorer</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/assets/FrontOffice/assets/img/logo.png" />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/FrontOffice/assets/img/apple-touch-icon.png"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+
+    <link
+      href="/assets/FrontOffice/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/assets/FrontOffice/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/assets/FrontOffice/assets/vendor/aos/aos.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/assets/FrontOffice/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/FrontOffice/assets/css/main.css" rel="stylesheet" />
+
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .form-container {
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group label {
+        font-weight: 600;
+      }
+
+      h2 {
+        color: white;
+      }
+
+      .btn-submit {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .btn-submit:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <app-header-front></app-header-front>
+   
+  
+      bjbjbjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb <br />
+      bjbjbjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb <br />
+      bjbjbjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb <br />
+      div class="card">
+
+
+<div class="separator"></div>
+<div class="card">
+  <div class="card-body"> 
+<body>
+  
+  <div class="form-container">
+    <h1 style="text-align: center;">Add Reclamation</h1>
+   
+    <form [formGroup]="reclamationForm" (ngSubmit)="addReclamationCompetiton() ">
+      <div class="form-group">
+        <label>Types:</label>
+        <div *ngFor="let type of reclamationTypes">
+          <label class="checkbox-label">
+            <input type="checkbox" [value]="type" (change)="toggleTypeSelection(type)" [checked]="typeFormArray.value.includes(type)">
+            {{ type }}
+          </label>
+        </div>
+        <div *ngIf="typeFormArray.invalid && typeFormArray.touched" class="text-danger">
+          Select at least one type.
+        </div>
+      </div>
+      
+      
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" formControlName="description" class="form-control" id="description">
+        <div *ngIf="reclamationForm.get('description')?.invalid && reclamationForm.get('description')?.touched" class="text-danger">
+          Description is required (3-10000 characters).
+        </div>
+        
+      </div>
+
+     
+      
+
+
+  
+     
+
+      <div class="separator1"></div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary custom-gradient-button">Add</button>
+
+        <span class="button-space"></span>
+       <!--bouton pour annuler la modification-->
+       <button type="button " (click)="cancelEdit" *ngIf="selectedReclamation" class="btn bnt-secondary">Cancel</button>
+      </div>
+    </form>
+  </div>
+ 
+   
+ <!-- Modal Success Message -->
+<div class="modal" id="successModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Reclamation Added Successfully!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Your reclamation has been added successfully.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>
+    bjbjbjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb <br />
+    bjbjbjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb <br />
+    bjbjbjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb <br />
+  </h2>
+  <app-footer-front></app-footer-front>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/FrontOffice/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/FrontOffice/assets/js/main.js"></script>
+
+
+
+    
+ 
+
+
+  
+
+
+
+
+

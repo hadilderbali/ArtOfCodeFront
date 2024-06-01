@@ -1,0 +1,94 @@
+/* Style de la boîte modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+  }
+  
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff; /* Couleur de fond */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Ombre douce */
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    animation: modal-show 0.3s ease; /* Animation d'apparition */
+  }
+  
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .close:hover {
+    color: #555; /* Changement de couleur au survol */
+  }
+  
+  .btn-container {
+    margin-top: 40px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff; /* Couleur principale du bouton */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3; /* Changement de couleur au survol */
+  }
+  
+  /* Animation pour afficher la boîte modale */
+  @keyframes modal-show {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  
+
+  .custom-gradient-button {
+    background: linear-gradient(to bottom, #8B0000, #4B0082);
+    color: #fff;
+    border: none; /* Supprime la bordure par défaut */
+    border-radius: 4px; /* Ajoutez une bordure arrondie si nécessaire */
+    padding: 10px 20px; /* Ajustez le rembourrage selon vos préférences */
+    font-size: 16px; /* Ajustez la taille de la police selon vos préférences */
+    cursor: pointer; /* Affichez un curseur pointer au survol */
+  }
+  
+  .custom-gradient-button:hover {
+    background: linear-gradient(to bottom, #4B0082, #8B0000); /* Inversion du dégradé au survol */
+  }
+  
+  .custom-ok-button:hover {
+    background: linear-gradient(to bottom, #4B0082, #8B0000); /* Inversion du dégradé au survol */
+  }

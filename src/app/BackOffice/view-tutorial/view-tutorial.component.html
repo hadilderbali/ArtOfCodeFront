@@ -1,0 +1,85 @@
+
+
+    
+<div class="card">
+  <div class="card-body">
+    <div >
+      <h1 style="text-align: center;">All Tutoriels</h1>
+ 
+<table class="table ">
+  
+    <thead class="thead-dark">
+      
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Durée</th>
+            <th>Vidéo</th>
+            <th>Niveau</th>
+            <th>Categorie</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tutorial of tutorials | paginate: { itemsPerPage: 3, currentPage: p }">
+            <td>{{tutorial.title}}</td>
+            <td>{{tutorial.description}}</td>
+            <td>{{tutorial.duration}}</td>
+            <td>
+              <video controls class="card-img card-img-top" width="480" height="360">
+                  <source [src]="'assets/videos/' + tutorial.video" type="video/mp4">
+                  Your browser does not support the video tag.
+              </video>
+          </td>
+          
+            <td>{{tutorial.level}}</td>
+            <td>{{tutorial.tutorialCategory}}</td>
+            
+            <td>
+              
+            <span class="button-space1"></span> 
+            
+            <button type="button" (click)="deleteTutorial(tutorial.tutorialId)" class="btn btn-outline-danger mx-2">
+              <i class="fas fa-trash-alt"></i> <!-- Icône de corbeille -->
+          </button>
+                       
+                   
+            <button type="button" (click)="update(tutorial.tutorialId)" class="btn btn-outline-success">
+              <i class="fas fa-edit"></i> <!-- Icône de modification -->
+          </button>
+          </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<!-- Utilisation d'un bouton <button> au lieu d'un lien <a> -->
+  <button type="button" routerLink="add-tutorial" routerLinkActive="active" class="btn btn-primary custom-gradient-button">
+    <b>+</b> Add Tutorial
+  </button>
+  
+ 
+<!-- Placer la directive pagination-controls à droite de la page -->
+<div style="text-align: right;">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+<div>
+  <div>
+  <!-- Your Angular router outlet -->
+<router-outlet></router-outlet>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+</div>
+<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+
+
+
+
