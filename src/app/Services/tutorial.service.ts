@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Tutorial } from '../models/tutorial';
 import { Comment } from '../models/comment';
@@ -9,16 +9,17 @@ import { Level } from '../models/level';
   providedIn: 'root',
 })
 export class TutorialService {
-  private baseUrl: string = 'http://localhost:8081/api/tutorial/';
-  private forbiddenWordsUrl: string = 'http://localhost:8081/api/tutorial/listbadword'; // Endpoint pour récupérer les mots interdits
-
+  private baseUrl: string = 'http://localhost:8089/user/api/v1/tutorial/';
+  private forbiddenWordsUrl: string = 'http://localhost:8089/api/v1/tutorial/listbadword'; // Endpoint pour récupérer les mots interdits
   private forbiddenWords: string[] = []; // Liste de mots interdits récupérés depuis le backend
-
   constructor(private http: HttpClient) {
+    
     this.loadForbiddenWords(); // Appeler la méthode pour charger les mots interdits au démarrage du service
   }
   private loadForbiddenWords(): void {
-    this.http.get<any[]>(this.forbiddenWordsUrl).subscribe(
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    this.http.get<any[]>(this.forbiddenWordsUrl,{headers}).subscribe(
       response => {
         if (Array.isArray(response)) {
           this.forbiddenWords = response.map(item => (item.badWord || '').toLowerCase());
@@ -35,33 +36,42 @@ export class TutorialService {
   
 
   getAllTutorials(): Observable<Tutorial[]> {
-    return this.http.get<Tutorial[]>(this.baseUrl + 'getAllTutorials');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+    return this.http.get<Tutorial[]>(this.baseUrl + 'getAllTutorials',{headers});
+  }
+  addtutorial(tutorial: Tutorial): Observable<Tutorial> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+    console.log(localStorage.getItem("access_token"))
+    return this.http.post<Tutorial>(this.baseUrl + 'addOrUpdate',tutorial,{headers});
   }
 
-  addtutorial(tutorial: Tutorial): Observable<Tutorial> {
-    return this.http.post<Tutorial>(this.baseUrl + 'addOrUpdate', tutorial);
-  }
 
   deleteTutorial(id: number): Observable<void> {
-    return this.http.delete<void>(this.baseUrl + 'delete/' + id);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.delete<void>(this.baseUrl + 'delete/' + id,{headers});
   }
 
   filterTutorialsByLevel(level: string): Observable<Tutorial[]> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
     const params = new HttpParams().set('level', level);
     return this.http.get<Tutorial[]>(`${this.baseUrl}/filterByLevel`, {
-      params,
+      params,headers
     });
   }
 
   getTutorialById(tutorialIdt: number): Observable<Tutorial> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
     return this.http.get<Tutorial>(
-      this.baseUrl + 'getTutorialById/' + tutorialIdt
+      this.baseUrl + 'getTutorialById/' + tutorialIdt,{headers}
     );
   }
   public updatetutorial(id: number, tutorial: Tutorial): Observable<Tutorial> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
     return this.http.put<Tutorial>(
       `${this.baseUrl}updateTutorial/${id}`,
-      tutorial
+      tutorial,{headers}
     );
   }
 
@@ -75,26 +85,35 @@ export class TutorialService {
     if (!!level) options += `&level=${level}`;
     if (!!category) options += `&categoryId=${category}`;
     const url = `${this.baseUrl}pagedd${options}`;
-    return this.http.get<any>(url);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<any>(url,{headers});
   }
 
   getCategories(): Observable<any[]> {
-    return this.http.get<any[]>(`http://localhost:8081/api/category/all`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<any[]>(`http://localhost:8081/api/category/all`,{headers});
   }
 
   //like and dislike
  likeTutorial(tutorialId: number): Observable<any> {
-  return this.http.post(`http://localhost:8081/api/tutorial/${tutorialId}/like`, {});
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+  return this.http.post(`http://localhost:8081/api/tutorial/${tutorialId}/like`, {headers});
 }
 
 
 dislikeTutorial(tutorialId: number): Observable<any> {
-  return this.http.post(`http://localhost:8081/api/tutorial/${tutorialId}/dislike`, {});
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+  return this.http.post(`http://localhost:8081/api/tutorial/${tutorialId}/dislike`, {headers});
 }
  //comments
  // Récupérer les vidéos avec les commentaires
  getEventsWithComments(): Observable<Tutorial[]> {
-  return this.http.get<Tutorial[]>(`${this.baseUrl}/tutorial/getAllTutorialsWithComments`);
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+  return this.http.get<Tutorial[]>(`${this.baseUrl}/tutorial/getAllTutorialsWithComments`,{headers});
 }
 
 // Ajouter un commentaire à une vidéo
@@ -107,8 +126,9 @@ addComment(tutorialId: number, userId: number, comment: Comment): Observable<Com
   };
 
   const url = `${this.baseUrl}${tutorialId}/comments/${userId}`;
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
 
-  return this.http.post<Comment>(url, commentToAdd).pipe(
+  return this.http.post<Comment>(url, commentToAdd,{headers}).pipe(
     catchError(error => {
       console.error('Error adding comment:', error);
       return throwError('Failed to add comment.');
@@ -131,14 +151,19 @@ private filterBadWords(content: string): string {
 }
 
 generateSharedLink(tutorialId: number): Observable<string> {
-  return this.http.get<string>(`http://example.com/${tutorialId}/share`);
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+  return this.http.get<string>(`http://example.com/${tutorialId}/share`,{headers});
 }
 
 shareTutorial(tutorialId: number) {
-  return this.http.get<string>(`http://localhost:8081/api/tutorial/${tutorialId}/share`);
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+  return this.http.get<string>(`http://localhost:8081/api/tutorial/${tutorialId}/share`,{headers});
 }
 
 getStatisticsByLevel(): Observable<{ [key in Level]: number }> {
-  return this.http.get<{ [key in Level]: number }>(this.baseUrl + 'statistics-by-level');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+  return this.http.get<{ [key in Level]: number }>(this.baseUrl + 'statistics-by-level',{headers});
 }
 }
