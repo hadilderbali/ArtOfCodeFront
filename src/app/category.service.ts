@@ -13,6 +13,7 @@ export class CategoryService {
  
   
   public getcategorybyid(){
+    console.log("test")
     return this.httpClient.get<Category>(`${this.baseURL}`+`category/all`)
   }
 }
