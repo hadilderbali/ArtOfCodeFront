@@ -31,6 +31,20 @@ import { ViewReclamationComponent } from './BackOffice/view-reclamation/view-rec
 import { AddReclamationComponent } from './BackOffice/add-reclamation/add-reclamation.component';
 import { UpdateReclamationComponent } from './BackOffice/update-reclamation/update-reclamation.component';
 import { StatisticsReclamationComponent } from './BackOffice/statistics-reclamation/statistics-reclamation.component';
+import { AddJobComponent } from './add-job/add-job.component';
+import { ListJobComponent } from './list-job/list-job.component';
+import { UpdateJobComponent } from './update-job/update-job.component';
+import { JobApplicationViewComponent } from './job-application-view/job-application-view.component';
+import { AddJobApplicationComponent } from './add-job-application/add-job-application.component';
+import { UpdateJobApplicationComponent } from './update-job-application/update-job-application.component';
+import { ListJobApplicationComponent } from './list-job-application/list-job-application.component';
+import { JobApplicationDetailsComponent } from './job-application-details/job-application-details.component';
+import { AddBlogComponent } from './add-blog/add-blog.component';
+import { ListBlogComponent } from './list-blog/list-blog.component';
+import { UpdateblogComponent } from './updateblog/updateblog.component';
+import { BlogViewComponent } from './blog-view/blog-view.component';
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { StaticRatingComponent } from './static-rating/static-rating.component';
 const routes: Routes = [
 
 {
@@ -57,10 +71,21 @@ const routes: Routes = [
  component:UpdatecandidacyComponent},
  {path:'update-competition/:id',
  component:UpdatecompetitionComponent},
-  {path: 'create-job-offer',
-   component:CreateJobOfferComponent},
-   {path: 'view-tutorial',
-   component:ViewTutorialComponent},
+ {path: 'add',component:AddJobComponent},
+ {path:'list',component:ListJobComponent},
+ { path: 'updateJobOffer/:idR', component: UpdateJobComponent},
+ {path:'view',component:JobApplicationViewComponent},
+ {path:'addJobApp/:idR',component:AddJobApplicationComponent},
+ {path:'updateJobApp/:idD',component:UpdateJobApplicationComponent},
+ {path:'listJobApp',component:ListJobApplicationComponent},
+ {path:'details/:id',component:JobApplicationDetailsComponent},
+ {path:'addblog',component:AddBlogComponent},
+ {path:'blogs',component:ListBlogComponent},
+ {path:'editblog/:id',component:UpdateblogComponent},
+ {path:'Blogview',component:BlogViewComponent},
+ { path: 'blog/:id', component: BlogDetailsComponent },
+ {path:'static',component:StaticRatingComponent},
+   {path: 'view-tutorial',component:ViewTutorialComponent},
    {path:"view-tutorial/add-tutorial",component:AddTutorialComponent},
    {path:'update-tutorial/:id',
    component:UpdateTutorialComponent},

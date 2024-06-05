@@ -1,0 +1,42 @@
+/* blog-details.component.css */
+
+.card {
+    max-width: 600px; /* Adjust the maximum width to your preference */
+    margin: 0 auto; /* Center the card horizontally */
+    margin-top: 20px; /* Add some top margin */
+    padding: 20px; /* Add padding to the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow for depth */
+  }
+  
+  .card__header {
+    overflow: hidden; /* Ensure image does not overflow the card */
+  }
+  
+  .card__image {
+    width: 100%; /* Make the image fill the entire width of the card */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .card__body {
+    margin-top: 20px; /* Add some margin between header and body */
+  }
+  
+  .card__footer {
+    margin-top: 20px; /* Add some margin between body and footer */
+  }
+  .tag {
+    align-self: flex-start;
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+  }
+  
+  .tag + .tag {
+    margin-left: .5em;
+  }
+  
+  .tag-blue {
+    background: linear-gradient(to bottom, #550202, #9e0303);
+    color: #fafafa;
+  }
+  

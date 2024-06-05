@@ -1,0 +1,71 @@
+
+/* Adjust table width */
+.table {
+  width: 100%;
+}
+
+/* Style the URL as blue and underline */
+.table a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Style the table actions buttons */
+.btn {
+  margin-right: 5px;
+}
+.actions-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.expanded-content {
+    display: block;
+}
+
+.truncated-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.show-more {
+    margin-top: 5px; /* Adjust as needed */
+}
+
+.show-more button {
+    padding: 0;
+}
+.star-rating {
+  font-size: 24px;
+  display: inline-block; 
+  line-height: 1; 
+  width: 120px; /* Adjust the width as needed */
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.star {
+  color: gray;
+  display: inline-block;
+  width: 24px; /* Adjust width of each star */
+  height: 24px; /* Adjust height of each star */
+}
+
+.checked {
+  color: gold;
+}
+
+.half {
+  position: relative;
+  display: inline-block;
+}
+
+.half:before {
+  content: '\2605'; /* Unicode character for a solid star */
+  position: absolute;
+  overflow: hidden;
+  width: 50%; /* Display half of the star */
+  color: gold; /* Color of the half star */
+}

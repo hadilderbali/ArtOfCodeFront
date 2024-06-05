@@ -1,0 +1,106 @@
+<!-- job-application-details.component.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DanceScape Explorer</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/FrontOffice/assets/img/logo.png">
+  <link rel="apple-touch-icon" href="/assets/FrontOffice/assets/img/apple-touch-icon.png"alt="" width=50 length=200>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/FrontOffice/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+<app-header-front></app-header-front>
+
+<div *ngIf="jobApplication" class="card" style="border-color: rgb(71, 2, 2);">  <div class="card-header bg-seconddry text-black">
+    <h5 class="card-title">Job Application Details</h5>
+  </div>
+  <div class="card-body bg-light">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="job-info">
+          <p><strong>Name:</strong> {{ jobApplication.nameD }}</p>
+          <p><strong>Email:</strong> {{ jobApplication.emailDancer }}</p>
+          <p><strong>Phone Number:</strong> {{ jobApplication.phoneNumberDancer }}</p>
+          <p><strong>Cover Letter:</strong></p>
+          <div>
+            <span class="border border-dark cover-letter">{{ jobApplication.coverLetter }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="certificate-container">
+          <img *ngIf="imageUrl" [src]="imageUrl" class="card-img-top" alt="Job App Image" style="max-height: 400px; max-width: 700px; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <button class="btn btn-outline-success" (click)="acceptJobApplication()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+          <path d="M1.738 7.742l6.262 6.261a1 1 0 0 0 1.32.084l.094-.083 8-8a1 1 0 0 0-1.32-1.497l-.094.083-7.25 7.25-5.25-5.25a1 1 0 1 0-1.414 1.414z"/>
+        </svg>
+        Accept
+      </button>
+     
+  <span class="ml-2"></span> <!-- Add space -->
+
+  <button class="btn btn-outline-danger" (click)="refuseJobApplication()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM4.354 4.354a.5.5 0 0 1 .708 0L8 7.293l3.938-3.939a.5.5 0 0 1 .708.708L8.707 8l3.937 3.938a.5.5 0 1 1-.708.708L8 8.707l-3.938 3.937a.5.5 0 0 1-.708-.708L7.293 8 3.354 4.062a.5.5 0 0 1 0-.708z"/>
+    </svg>
+    Refuse
+  </button>
+
+  <span class="ml-2"></span> <!-- Add space -->
+    <button class="btn btn-outline-dark" (click)="returnToList()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M11.354 4.646a.5.5 0 0 1 0 .708L7.707 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0z"/>
+      </svg>
+      Back to List
+    </button>
+  </div>
+  
+      
+    </div>
+  </div>
+
+<div *ngIf="!jobApplication" class="alert alert-warning mt-3" role="alert">
+  No job application details available.
+</div>
+
+  
+  
+  <app-footer-front></app-footer-front>
+<!-- Vendor JS Files -->
+<script src="/assets/FrontOffice/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/aos/aos.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/FrontOffice/assets/js/main.js"></script>
+</body>
+
+</html>

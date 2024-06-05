@@ -1,0 +1,125 @@
+
+/* Card body styles */
+.card__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+/* Tag styles */
+.tag {
+  align-self: flex-start;
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+}
+
+.tag + .tag {
+  margin-left: .5em;
+}
+
+.tag-blue {
+  background: linear-gradient(to bottom, #550202, #9e0303);
+  color: #fafafa;
+}
+
+/* Footer styles */
+.card__footer {
+  display: flex;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+/* User info styles */
+.user__info > small {
+  color: #666;
+}
+
+/* Column styles */
+.col-md-4 {
+  margin-bottom: 20px;
+}
+.container {
+  /* Add padding to create space between cards */
+  padding: 20px;
+}
+
+/* Add a min-height to the card container */
+.card-container {
+  min-height: 400px; /* Adjust as needed */
+}
+
+
+  /* Custom pagination styles */
+  .pagination .page-link {
+    color: #8B0000; /* Dark red color */
+  }
+
+  .pagination .page-link:hover {
+    color: #800000; /* Darker red color on hover */
+  }
+
+  .pagination .page-item.active .page-link {
+    background-color: #8B0000; /* Dark red background for active page */
+    border-color: #8B0000; /* Dark red border color for active page */
+  }
+
+  .pagination .page-item.disabled .page-link {
+    color: #ccc; /* Light gray color for disabled page */
+  }
+
+  .pagination .page-link:focus {
+    box-shadow: none; /* Remove focus box shadow */
+  }
+  
+  /* White color for pagination link text */
+  .pagination .page-link {
+    color: #720101; /* White color for pagination link text */
+  }
+  .input-group {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 8px;
+  }
+    .shared-input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 16px;
+    flex: 1;
+    width: 120px; /* Adjust width as needed */
+  }
+  .star-rating {
+    font-size: 24px;
+    display: inline-block; 
+    line-height: 1; 
+  }
+  
+  .star {
+    color: gray;
+    display: inline-block;
+    width: 24px; /* Adjust width of each star */
+    height: 24px; /* Adjust height of each star */
+  }
+  
+  .checked {
+    color: gold;
+  }
+  
+  .half {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .half:before {
+    content: '\2605'; /* Unicode character for a solid star */
+    position: absolute;
+    overflow: hidden;
+    width: 50%; /* Display half of the star */
+    color: gold; /* Color of the half star */
+  }
+  

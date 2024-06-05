@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DanceScape Explorer</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/FrontOffice/assets/img/logo.png">
+  <link rel="apple-touch-icon" href="/assets/FrontOffice/assets/img/apple-touch-icon.png" alt="" width=50 length=200>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/FrontOffice/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+<app-header-front></app-header-front>
+<!-- job-application-view.component.html -->
+<div class="container">
+
+  <div class="container text-center">
+    <h3>Find your job</h3>
+    <div class="search-bar">
+      <input type="text" (input)="onKeywordChange($event)" [(ngModel)]="tempKeyword" placeholder="Job title" class="keyword-input">
+      <div class="separator"></div>
+      <input type="text" (input)="onLocationChange($event)" [(ngModel)]="tempLocation" placeholder="City, state" class="location-input">
+      <button class="btn btn-outline-dark" (click)="searchJobOffers()">Search</button>
+
+    </div>
+    
+    
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let jobOffer of jobOffers">
+        <div class="card shadow h-100">
+          <img [src]="jobService.getJobOfferPhoto(jobOffer.idR)" class="card-img-top" alt="Job Offer Image" style="height: 200px; width: 100%; object-fit: cover;">
+          <div class="card-body">
+            <!-- Catchy title -->
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">{{ jobOffer.title }}</h5>
+            <p class="card-text"><strong>Location:</strong> {{ jobOffer.location }}</p>
+            <button (click)="toggleDetails(jobOffer.idR)" class="btn btn-outline-dark">
+              <i class="fas fa-list mr-2"></i> <!-- FontAwesome icon with margin-right -->
+
+              {{ isDetailsVisible(jobOffer.idR) ? 'Hide Details' : 'Show Details' }}</button>
+
+            <div *ngIf="isDetailsVisible(jobOffer.idR)">
+              <p class="card-text"><strong>Description:</strong> {{ jobOffer.description }}</p>
+              <p class="card-text"><strong>Date Posted:</strong> {{ jobOffer.datePost | date }}</p>
+              <p class="card-text"><strong>Email:</strong> {{ jobOffer.email }}</p>
+              <p class="card-text"><strong>Salary Range:</strong> {{ jobOffer.salaryRange }}</p>
+              <p class="card-text"><strong>Job Type:</strong> {{ jobOffer.jobType }}</p>
+              <button (click)="applyForJob(jobOffer)" class="btn btn-outline-dark">
+                Apply Now 
+                <i class="bi bi-briefcase-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <div *ngIf="jobOffers.length === 0 && (keyword || location)" class="alert alert-info">
+    No job offers found.
+  </div>
+
+<!-- Pagination -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12 mb-4 text-left">
+          <button (click)="viewJobApplications()" class="btn btn-outline-dark">View Your Job Applications</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <nav *ngIf="totalPages > 0" aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item" (click)="prevPage()" [class.disabled]="currentPage === 0">
+            <button class="page-link" aria-label="Previous">
+              <span aria-hidden="true">&laquo; Previous</span>
+            </button>
+          </li>
+          <li class="page-item" *ngFor="let pageNumber of generatePageNumbers()" (click)="goToPage(pageNumber)"
+            [class.active]="pageNumber === currentPage">
+            <button class="page-link" *ngIf="pageNumber < totalPages">{{ pageNumber + 1 }}</button>
+          </li>
+          <li class="page-item" (click)="nextPage()" [class.disabled]="currentPage === totalPages - 1">
+            <button class="page-link" aria-label="Next">
+              <span aria-hidden="true">Next &raquo;</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+</div>
+
+<app-footer-front></app-footer-front>
+
+<!-- Vendor JS Files -->
+<script src="/assets/FrontOffice/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/aos/aos.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/FrontOffice/assets/js/main.js"></script>
+</body>
+
+</html>
+
+  

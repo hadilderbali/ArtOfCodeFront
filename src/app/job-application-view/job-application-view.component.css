@@ -1,0 +1,71 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 8px;
+  }
+  
+  .search-bar input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 16px;
+    flex: 1;
+    width: 120px; /* Adjust width as needed */
+  }
+  
+  .keyword-input {
+    border-radius: 5px 0 0 5px;
+  }
+  
+  .location-input {
+    border-radius: 0 5px 5px 0;
+  }
+  .separator {
+    width: 1px;
+    height: 24px; /* Adjust as needed */
+    background-color: #cccccc;
+    margin: 0 8px; /* Adjust as needed */
+  }
+  
+  .search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 40px; /* Adjust width as needed */
+  }
+  
+  .search-button svg {
+    fill: #007bff;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Custom pagination styles */
+  .pagination .page-link {
+    color: #8B0000; /* Dark red color */
+  }
+
+  .pagination .page-link:hover {
+    color: #800000; /* Darker red color on hover */
+  }
+
+  .pagination .page-item.active .page-link {
+    background-color: #8B0000; /* Dark red background for active page */
+    border-color: #8B0000; /* Dark red border color for active page */
+  }
+
+  .pagination .page-item.disabled .page-link {
+    color: #ccc; /* Light gray color for disabled page */
+  }
+
+  .pagination .page-link:focus {
+    box-shadow: none; /* Remove focus box shadow */
+  }
+  
+  /* White color for pagination link text */
+  .pagination .page-link {
+    color: #720101; /* White color for pagination link text */
+  }

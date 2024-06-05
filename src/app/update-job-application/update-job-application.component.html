@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DanceScape Explorer</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/FrontOffice/assets/img/logo.png" alt="" width=50 length=200>
+  <link rel="apple-touch-icon" href="/assets/FrontOffice/assets/img/apple-touch-icon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/FrontOffice/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+  <app-header-front></app-header-front>
+
+<div class="container">
+  <h2>Update Job Application</h2>
+  <form (ngSubmit)="updateJobApp()">
+    <div class="form-group">
+      <label for="nameD">Full Name:</label>
+      <input type="text" class="form-control" id="nameD" name="nameD" [(ngModel)]="jobApplication.nameD" required>
+    </div>
+    <div class="form-group">
+      <label for="emailDancer">Email:</label>
+      <input type="email" class="form-control" id="emailDancer" name="emailDancer" [(ngModel)]="jobApplication.emailDancer" required>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumberDancer">Phone Number:</label>
+      <input type="text" class="form-control" id="phoneNumberDancer" name="phoneNumberDancer" [(ngModel)]="jobApplication.phoneNumberDancer" required>
+    </div>
+    <div class="form-group">
+      <label for="imageA">CV Image:</label>
+      <label for="image">Upload CV Image:</label>
+      <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+    
+    <div class="form-group">
+      <label for="coverLetter">Cover Letter:</label>
+      <textarea class="form-control" id="coverLetter" name="coverLetter" [(ngModel)]="jobApplication.coverLetter" required></textarea>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success">Update</button>
+    <span style="margin-left: 10px;"></span>
+
+    <a class="btn btn-outline-success" routerLink="/listJobApp"><i class="fa fa-plus-square"></i> Back To List</a>
+  </form>
+</div>
+
+<app-footer-front></app-footer-front>
+
+<!-- Vendor JS Files -->
+<script src="/assets/FrontOffice/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/aos/aos.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/FrontOffice/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/FrontOffice/assets/js/main.js"></script>
+</body>
+</html>

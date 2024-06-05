@@ -55,6 +55,21 @@ import { AddReclamationFrontComponent } from './FrontOffice/add-reclamation-fron
 import { ViewTutorialFrontComponent } from './FrontOffice/view-tutorial-front/view-tutorial-front.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AddJobComponent } from './add-job/add-job.component';
+import { ListJobComponent } from './list-job/list-job.component';
+import { UpdateJobComponent } from './update-job/update-job.component';
+import { JobApplicationViewComponent } from './job-application-view/job-application-view.component';
+import { AddJobApplicationComponent } from './add-job-application/add-job-application.component';
+import { UpdateJobApplicationComponent } from './update-job-application/update-job-application.component';
+import { ListJobApplicationComponent } from './list-job-application/list-job-application.component';
+import { JobApplicationDetailsComponent } from './job-application-details/job-application-details.component';
+import { AddBlogComponent } from './add-blog/add-blog.component';
+import { ListBlogComponent } from './list-blog/list-blog.component';
+import { UpdateblogComponent } from './updateblog/updateblog.component';
+import { BlogViewComponent } from './blog-view/blog-view.component';
+import { CustomFilterPipe } from './services/custom-filter-pipe.pipe';
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { StaticRatingComponent } from './static-rating/static-rating.component';
 const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
 
 // Créez une fonction qui renvoie un TranslateHttpLoader pour charger les fichiers de langue
@@ -107,6 +122,21 @@ const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
  
     StatisticsReclamationComponent,
       FilterPipe,
+      AddJobComponent,
+      ListJobComponent,
+      UpdateJobComponent,
+      JobApplicationViewComponent,
+      AddJobApplicationComponent,
+      UpdateJobApplicationComponent,
+      ListJobApplicationComponent,
+    
+      JobApplicationDetailsComponent,
+         AddBlogComponent,
+         ListBlogComponent,
+         UpdateblogComponent,
+         BlogViewComponent,
+         BlogDetailsComponent,
+         StaticRatingComponent,
     
   ],
   imports: [

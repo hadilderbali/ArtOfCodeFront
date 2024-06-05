@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title</title>
+    <link href="/assets/BackOffice/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/assets/BackOffice/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .table th, .table td {
+            vertical-align: middle; /* Align content vertically in cells */
+        }
+        .table th {
+            padding-top: 10px; /* Adjust top padding of table headers */
+            padding-bottom: 10px; /* Adjust bottom padding of table headers */
+        }
+        .table td {
+            padding-top: 8px; /* Adjust top padding of table cells */
+            padding-bottom: 8px; /* Adjust bottom padding of table cells */
+        }
+        .actions-btns button {
+            margin: 0 5px; /* Add margin between buttons */
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <app-sidebar-back></app-sidebar-back>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <app-navebar-back></app-navebar-back>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Your Angular router outlet -->
+                    <router-outlet></router-outlet>
+                    <h3>Job Offer List</h3>
+
+                    <!-- Blog List Table -->
+                  <!-- Blog List Table -->
+                  <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Content</th>
+                                <th>URL</th>
+                                <th>Image</th> <!-- Fixed the closing tag -->
+                                <th>Rating</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let blog of blogs">
+                                <td>{{ blog.title }}</td>
+                                <td>{{ blog.blogCategory }}</td>
+                                <td>
+                                    <!-- Content with dropdown functionality -->
+                                    <div>
+                                        <p *ngIf="!blog.expanded">{{ truncateContent(blog.content, 50) }}</p>
+                                        <p *ngIf="blog.expanded">{{ blog.content }}</p>
+                                        <i class="fas" (click)="toggleContent(blog)" [ngClass]="{'fa-chevron-down': !blog.expanded, 'fa-chevron-up': blog.expanded}"></i>
+                                    </div>
+                                </td>
+                                <td><a href="{{ blog.url }}" target="_blank">{{ blog.url }}</a></td>
+                               
+                                <td>
+                                    <!-- Image -->
+                                    <img [src]="getBlogPhotoUrl(blog.idBlog)" alt="blog image" class="img-thumbnail" style="max-width: 100px;">
+                                </td>
+                                <td>
+                                    <!-- Rating as stars -->
+                                    <div class="rating">
+                                        <div class="star-rating">
+                                            <span *ngFor="let star of getStars(overallRatings[blog.idBlog])" class="star" [ngClass]="{'checked': star === 'checked', 'half': star === 'half'}">&#9733;</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td>{{ blog.createdDate }}</td>
+                               
+                                <td>
+                                    <!-- Container for edit and delete buttons -->
+                                    <div style="display: flex; gap: 8px;">
+                                        <!-- Update button -->
+                                        <button type="button" (click)="navigateToUpdateBlog(blog.idBlog)" class="btn btn-outline-success">
+                                            <i class="fas fa-edit"></i> <!-- Edit Icon -->
+                                        </button>
+                                        <!-- Delete button -->
+                                        <button type="button" (click)="deleteBlog(blog.idBlog)" class="btn btn-outline-danger">
+                                            <i class="fas fa-trash-alt"></i> <!-- Trash Icon -->
+                                        </button>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+<!-- End Blog List Table -->
+<div class="d-flex justify-content-between align-items-center mt-3">
+    <button (click)="navigateToAddblog()" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Post New Blog
+                        </button>
+
+                    <!-- Pagination -->
+                    <nav *ngIf="totalPages > 0" aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end mb-0">
+                            <li class="page-item" (click)="prevPage()" [class.disabled]="currentPage === 0">
+                                <button class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo; Previous</span>
+                                </button>
+                            </li>
+                            <li class="page-item" *ngFor="let pageNumber of generatePageNumbers()"
+                                (click)="goToPage(pageNumber)" [class.active]="pageNumber === currentPage">
+                                <button class="page-link" *ngIf="pageNumber < totalPages">
+                                    {{ pageNumber + 1 }}
+                                </button>
+                            </li>
+                            <li class="page-item" (click)="nextPage()" [class.disabled]="currentPage === totalPages - 1">
+                                <button class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">Next &raquo;</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Your existing script imports -->
+</body>
+
+</html>
