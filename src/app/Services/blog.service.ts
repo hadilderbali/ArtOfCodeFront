@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Blog } from '../Model/Blog';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { Page } from '../Model/Page';
   providedIn: 'root'
 })
 export class BlogService {
-  private baseUrl ='http://localhost:8082/api';
+  private baseUrl ='http://localhost:8089/user';
   constructor(private httpclient: HttpClient) {}
 
   addBlog(blog: FormData, adminId: number): Observable<any> {
@@ -17,7 +17,12 @@ export class BlogService {
     const url = `${this.baseUrl}/blog/addBlog?adminId=${adminId}`;
 
     // Make the POST request with the blog data
-    return this.httpclient.post<any>(url, blog);
+        const headers = new HttpHeaders().set(
+          'Authorization',
+          `Bearer ${localStorage.getItem('access_token')}`
+        );
+
+    return this.httpclient.post<any>(url, blog, { headers });
   }
   updateBlog(id: number, updatedBlog: Blog): Observable<any> {
     return this.httpclient.put<any>(`${this.baseUrl}/blog/${id}`, updatedBlog);
