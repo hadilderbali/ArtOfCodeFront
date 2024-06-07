@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Blog, BlogCategory } from '../Model/Blog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlogService } from '../services/blog.service';
+import { BlogService } from '../Services/blog.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 

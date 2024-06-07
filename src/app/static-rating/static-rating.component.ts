@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart, { ChartOptions } from 'chart.js/auto';
-import { BlogService } from '../services/blog.service';
+import { BlogService } from '../Services/blog.service';
 import { Rating } from '../Model/Rating';
 
 @Component({

@@ -20,19 +20,17 @@ export class JobService {
     private cookieService: CookieService
   ) {}
   addJobOffer(formData: FormData, recruiterId: number): Observable<JobOffer> {
-        const headers = new HttpHeaders().set(
-          'Authorization',
-          `Bearer ${localStorage.getItem('access_token')}`
-        );
-
-    const url = `${this.baseUrl}/job/addOffer?recruiterId=${recruiterId}`;
-    return this.httpClient.post(url, formData, { headers }).pipe(
-      map((response: any) => response as JobOffer), // Transform the response into a JobOffer
-      tap((newJobOffer: JobOffer) => {
-        this.newJobOfferSubject.next(newJobOffer); // Emit the new job offer
-      })
+    const headers = new HttpHeaders().set(
+        'Authorization',
+        `Bearer ${localStorage.getItem('access_token')}`,
+        
     );
-  }
+    headers.set('content-type', 'multipart/form-data')
+    const url = `${this.baseUrl}/job/addOffer?recruiterId=${recruiterId}`;
+    console.log(formData)
+    return this.httpClient.post<JobOffer>(url, formData, { headers })
+    
+}
 
   // Observable to subscribe to new job offers
   getNewJobOffers(): Observable<JobOffer> {
@@ -135,8 +133,11 @@ export class JobService {
     size: number = 3
   ): Observable<Page<JobOffer>> {
     const url = `${this.baseUrl}/job/search?title=${title}&location=${location}&page=${page}&size=${size}`;
-
-    return this.httpClient.get<Page<JobOffer>>(url).pipe(
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpClient.get<Page<JobOffer>>(url,  { headers }).pipe(
       map((page) => {
         // Store search criteria in cookies after successful search
         this.cookieService.set(`keyword_${this.dancerId}`, title);

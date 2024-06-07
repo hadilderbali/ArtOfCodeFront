@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobApplication } from '../Model/JobApplication';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JobapplicationService } from '../services/jobapplication.service';
+import { JobapplicationService } from '../Services/jobapplication.service';
 
 @Component({
   selector: 'app-update-job-application',

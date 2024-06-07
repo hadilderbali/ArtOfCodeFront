@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { JobApplication } from '../Model/JobApplication';
-import { JobapplicationService } from '../services/jobapplication.service';
+import { JobapplicationService } from '../Services/jobapplication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobOffer } from '../Model/JobOffer';
-import { JobService } from '../services/job.service';
+import { JobService } from '../Services/job.service';
 @Component({
   selector: 'app-add-job-application',
   templateUrl: './add-job-application.component.html',

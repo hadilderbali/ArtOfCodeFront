@@ -67,9 +67,10 @@ import { AddBlogComponent } from './add-blog/add-blog.component';
 import { ListBlogComponent } from './list-blog/list-blog.component';
 import { UpdateblogComponent } from './updateblog/updateblog.component';
 import { BlogViewComponent } from './blog-view/blog-view.component';
-import { CustomFilterPipe } from './services/custom-filter-pipe.pipe';
+import { CustomFilterPipe } from './Services/custom-filter-pipe.pipe';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { StaticRatingComponent } from './static-rating/static-rating.component';
+import { DatePipe } from '@angular/common';
 const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
 
 // Créez une fonction qui renvoie un TranslateHttpLoader pour charger les fichiers de langue
@@ -150,7 +151,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
     Ng2SearchPipeModule
      
   ],
-  providers: [WebsocketService],
+  providers: [WebsocketService,DatePipe,CustomFilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

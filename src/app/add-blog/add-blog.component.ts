@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BlogService } from '../services/blog.service';
+import { BlogService } from '../Services/blog.service';
 import { Blog, BlogCategory } from '../Model/Blog';
 import { Router } from '@angular/router';
 

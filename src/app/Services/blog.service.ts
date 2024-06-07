@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Blog } from '../Model/Blog';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Rating } from '../Model/Rating';
 import { Page } from '../Model/Page';
 
@@ -25,38 +25,79 @@ export class BlogService {
     return this.httpclient.post<any>(url, blog, { headers });
   }
   updateBlog(id: number, updatedBlog: Blog): Observable<any> {
-    return this.httpclient.put<any>(`${this.baseUrl}/blog/${id}`, updatedBlog);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.put<any>(`${this.baseUrl}/blog/${id}`, updatedBlog,{headers});
   }
   getBlog(id: number): Observable<Blog> {
-    return this.httpclient.get<Blog>(`${this.baseUrl}/blog/get/${id}`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.get<Blog>(`${this.baseUrl}/blog/get/${id}`,{headers});
   }
  
 
   getBlogs(page: number, size: number): Observable<Page<Blog>> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.httpclient.get<Page<Blog>>(`${this.baseUrl}/blog/getblogs`, { params });
+    return this.httpclient.get<Page<Blog>>(`${this.baseUrl}/blog/getblogs`, { params ,headers});
   }
 
   deleteBlog(id: number): Observable<any> {
-    return this.httpclient.delete<any>(`${this.baseUrl}/blog/delete/${id}`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.delete<any>(`${this.baseUrl}/blog/delete/${id}`,{headers});
   }
+  // getBlogPhoto(blogId: number): Observable<string> {
+  //   const headers = new HttpHeaders().set(
+  //     'Authorization',
+  //     `Bearer ${localStorage.getItem('access_token')}`
+  //   );
+  //   const url = `${this.baseUrl}/ImgBlog/${blogId}`;
+  
+  //   return this.httpclient.get(url, { headers, responseType: 'blob' }).pipe(
+  //     map(blob => {
+  //       const objectURL = URL.createObjectURL(blob);
+  //       return objectURL;
+  //     })
+  //   );
+  // }
   getBlogPhoto(blogId: number): string {
     return `${this.baseUrl}/blog/ImgBlog/${blogId}`;
   }
-
   addRating(userId: number, blogId: number, rating: number): Observable<any> {
     // Make the POST request with the user ID, blog ID, and rating
-    return this.httpclient.post<any>(`http://localhost:8082/api/Rating/add/${userId}/${blogId}/${rating}`, null);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.post<any>(`http://localhost:8089/api/Rating/add/${userId}/${blogId}/${rating}`, null,{headers});
   }
   getRatingsByBlogId(blogId: number): Observable<Rating[]> {
-    return this.httpclient.get<Rating[]>(`${this.baseUrl}/blog/${blogId}`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.get<Rating[]>(`${this.baseUrl}/blog/${blogId}`,{headers});
   }
   getRatingByUserAndBlog(userId: number, blogId: number): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
     // Make the GET request with the user ID and blog ID as query parameters
-    return this.httpclient.get<any>(`http://localhost:8082/api/Rating/getpro/${userId}/${blogId}`);
+    return this.httpclient.get<any>(`http://localhost:8089/api/Rating/getpro/${userId}/${blogId}`,{headers});
   }
   
   
@@ -92,28 +133,51 @@ export class BlogService {
       .set('category', category)
       .set('size', size.toString())
       .set('page', page.toString());
-
-    return this.httpclient.get<Page<Blog>>(`${this.baseUrl}/blog/search`, { params: params });
+      const headers = new HttpHeaders().set(
+        'Authorization',
+        `Bearer ${localStorage.getItem('access_token')}`
+      );
+    return this.httpclient.get<Page<Blog>>(`${this.baseUrl}/blog/search`, { params: params ,headers});
   }
   getOverallRating(blogId: number): Observable<number> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
     const url = `${this.baseUrl}/Rating/overall/${blogId}`;
-    return this.httpclient.get<number>(url);
+    return this.httpclient.get<number>(url,{headers});
   }
 
   getAverageRatingPerCategory(): Observable<any> {
-    return this.httpclient.get<any>(`${this.baseUrl}/Rating/average`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.get<any>(`${this.baseUrl}/Rating/average`,{headers});
   }
 
   getTotalNumberOfRatingsPerCategory(): Observable<any> {
-    return this.httpclient.get<any>(`${this.baseUrl}/Rating/total`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.get<any>(`${this.baseUrl}/Rating/total`,{headers});
   }
 
   getHighestRatedBlogPerCategory(): Observable<any> {
-    return this.httpclient.get<any>(`${this.baseUrl}/Rating/highest`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.get<any>(`${this.baseUrl}/Rating/highest`,{headers});
   }
 
   getLowestRatedBlogPerCategory(): Observable<any> {
-    return this.httpclient.get<any>(`${this.baseUrl}/Rating/lowest`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    return this.httpclient.get<any>(`${this.baseUrl}/Rating/lowest`,{headers});
   }
 }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobOffer } from '../Model/JobOffer';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JobService } from '../services/job.service';
+import { JobService } from '../Services/job.service';
 import { DatePipe } from '@angular/common';
 
 @Component({

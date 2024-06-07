@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobApplication } from '../Model/JobApplication';
-import { JobapplicationService } from '../services/jobapplication.service';
+import { JobapplicationService } from '../Services/jobapplication.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Page } from '../Model/Page';

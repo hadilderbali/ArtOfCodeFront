@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { JobOffer, Type } from '../Model/JobOffer';
-import { JobService } from '../services/job.service';
+import { JobService } from '../Services/job.service';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { Subscription, switchMap, timer } from 'rxjs';
