@@ -143,7 +143,7 @@ export class BlogViewComponent implements OnInit {
     blog.expanded = !blog.expanded;
   }
 
-  getBlogPhotoUrl(blogId: number): Observable<string> {
+  getBlogPhotoUrl(blogId: number): string {
     return this.blogService.getBlogPhoto(blogId);
   }
 

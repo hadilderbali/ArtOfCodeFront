@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Blog } from '../Model/Blog';
-import { BlogService } from '../services/blog.service';
+import { BlogService } from '../Services/blog.service';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';

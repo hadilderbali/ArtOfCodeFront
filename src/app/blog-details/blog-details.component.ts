@@ -92,7 +92,7 @@ export class BlogDetailsComponent implements OnInit, OnDestroy {
     return dateString.replace(/\//g, '-');
   }
 
-  getBlogPhotoUrl(blogId: number): Observable<string> {
+  getBlogPhotoUrl(blogId: number): string{
     return this.blogService.getBlogPhoto(blogId);
   }
 
