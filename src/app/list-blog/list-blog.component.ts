@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Page } from '../Model/Page';
-import { forkJoin } from 'rxjs';
+import { Observable, forkJoin, tap } from 'rxjs';
 
 @Component({
   selector: 'app-list-blog',
@@ -25,22 +25,32 @@ export class ListBlogComponent {
 
   ngOnInit(): void {
     this.fetchBlogs();
+    console.log("aa")
+    
   // Fetch blogs from service...
   this.blogs.forEach(blog => {
     blog.expanded = false; // Initialize expanded property
   });
   }
 
+
   fetchBlogs(): void {
     this.blogService.getBlogs(this.currentPage, this.pageSize)
       .subscribe((blogs: Page<Blog>) => {
-        this.blogs = blogs.content;
-        this.totalPages = blogs.totalPages;
-        this.calculateRatings(); // Calculate ratings for fetched blogs
-        // Update totalPages
+        const blogPhotoObservables = blogs.content.map(blog => 
+          this.blogService.getBlogPhoto(blog.idBlog)
+            .pipe(tap(url => this.blogPhotoUrl[blog.idBlog] = url))
+        );
+  
+        forkJoin(blogPhotoObservables).subscribe(() => {
+          this.blogs = blogs.content;
+          this.totalPages = blogs.totalPages;
+          this.calculateRatings(); // Calculate ratings for fetched blogs
+        }, error => {
+          console.error('Error fetching blog photos:', error);
+        });
       });
   }
-  
   truncateContent(content: string, maxLength: number): string {
     return content.length > maxLength ? content.substring(0, maxLength) + '...' : content;
   }
@@ -119,8 +129,18 @@ calculateDuration(createdDate: any): string {
 
   return formattedDuration || 'Invalid Date';
 }
-getBlogPhotoUrl(blogId: number): string {
-  return this.blogService.getBlogPhoto(blogId);
+blogPhotoUrl: any[] = [];
+
+getBlogPhotoUrl(blogId: number) {
+  this.blogService.getBlogPhoto(blogId).subscribe(
+    url => {
+      this.blogPhotoUrl[blogId] = url;
+      console.log(url)
+    },
+    error => {
+      console.error('Error fetching blog photo URL:', error);
+    }
+  );
 }
 
 nextPage(): void {

@@ -23,6 +23,10 @@ export class JobapplicationService {
     'Authorization',
     `Bearer ${localStorage.getItem('access_token')}`
   );
+  console.log("jobOfferId",jobOfferId)
+  console.log("dancerId",dancerId)
+  console.log("formData",formData)
+  console.log('token',localStorage.getItem('access_token'))
     return this.httpClient.post(url, formData, { params: { jobOfferId: jobOfferId.toString(), dancerId: dancerId.toString() },headers });
   }
     updateJobApplicationWithoutImage(id: number, updatedJobApplication: JobApplication): Observable<any> {

@@ -10,8 +10,10 @@ import { Rating } from '../Model/Rating';
 })
 export class StaticRatingComponent implements OnInit { 
   ratingsData: any = {};
- highestRatedBlogs: { [key: string]: Rating } = {};
-  lowestRatedBlogs: { [key: string]: Rating } = {};
+  highestLowestChart: Chart | null = null;
+  ratingsChart: Chart | null = null;
+  highestRatedBlogs: any;
+  lowestRatedBlogs: any;
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
@@ -53,7 +55,10 @@ export class StaticRatingComponent implements OnInit {
     // Extracting ratings from the objects
     const highestRatings = Object.values(this.highestRatedBlogs);
     const lowestRatings = Object.values(this.lowestRatedBlogs);
-  
+    if (this.highestLowestChart) {
+      this.highestLowestChart.destroy();
+    }
+
     const ctx = document.getElementById('highestLowestChart') as HTMLCanvasElement;
     new Chart(ctx, {
       type: 'line', // Change chart type to line
@@ -77,11 +82,15 @@ export class StaticRatingComponent implements OnInit {
         }
       }
     });
+    
   }
   
   createRatingsChart(): void {
     if (!this.ratingsData.averageRatings || !this.ratingsData.totalRatings) {
       return; // Wait until both sets of data are available
+    }
+    if (this.ratingsChart) {
+      this.ratingsChart.destroy();
     }
 
     const categories = Object.keys(this.ratingsData.averageRatings);

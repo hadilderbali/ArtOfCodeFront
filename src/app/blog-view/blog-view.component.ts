@@ -7,7 +7,7 @@ import { CustomFilterPipe } from '../Services/custom-filter-pipe.pipe';
 import { Page } from '../Model/Page';
 import { Router } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
-
+import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-blog-view',
   templateUrl: './blog-view.component.html',
@@ -46,6 +46,8 @@ export class BlogViewComponent implements OnInit {
     this.loadBlogs();
   }
 
+
+  
   loadBlogs(): void {
     if (this.searchQuery.trim() !== '') {
       this.filteredBlogs = this.blogs.filter(blog =>
@@ -60,10 +62,19 @@ export class BlogViewComponent implements OnInit {
     } else {
       this.blogService.getBlogs(this.currentPage, this.pageSize)
         .subscribe((page: Page<Blog>) => {
-          this.blogs = page.content;
-          this.totalPages = page.totalPages;
-          this.filteredBlogs = this.blogs;
-          this.calculateRatings();
+          const blogPhotoObservables = page.content.map(blog => 
+            this.blogService.getBlogPhoto(blog.idBlog)
+              .pipe(tap(url => this.blogPhotoUrl[blog.idBlog] = url))
+          );
+  
+          forkJoin(blogPhotoObservables).subscribe(() => {
+            this.blogs = page.content;
+            this.totalPages = page.totalPages;
+            this.filteredBlogs = this.blogs;
+            this.calculateRatings();
+          }, error => {
+            console.error('Error fetching blog photos:', error);
+          });
         });
     }
   }
@@ -143,8 +154,18 @@ export class BlogViewComponent implements OnInit {
     blog.expanded = !blog.expanded;
   }
 
-  getBlogPhotoUrl(blogId: number): string {
-    return this.blogService.getBlogPhoto(blogId);
+  blogPhotoUrl: any[] = [];
+
+  getBlogPhotoUrl(blogId: number) {
+    this.blogService.getBlogPhoto(blogId).subscribe(
+      url => {
+        this.blogPhotoUrl[blogId] = url;
+        console.log(url)
+      },
+      error => {
+        console.error('Error fetching blog photo URL:', error);
+      }
+    );
   }
 
   nextPage(): void {

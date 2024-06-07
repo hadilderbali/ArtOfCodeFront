@@ -4,6 +4,7 @@ import { JobapplicationService } from '../Services/jobapplication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobOffer } from '../Model/JobOffer';
 import { JobService } from '../Services/job.service';
+import { ProfileService } from '../Services/profile.service';
 @Component({
   selector: 'app-add-job-application',
   templateUrl: './add-job-application.component.html',
@@ -21,14 +22,14 @@ dancerId: number = 0; // Add dancerId property
 imgURL:any;
 imagePath:any;
 
-constructor(private jobApplicationService:JobapplicationService,private jobservice:JobService,private router:Router,    private route: ActivatedRoute ){
+constructor(private jobApplicationService:JobapplicationService,private jobservice:JobService,private router:Router,    private route: ActivatedRoute,private ProfileService:ProfileService ){
 }
 ngOnInit(): void {
   this.route.params.subscribe(params => {
     this.idJobOffer = +params['idR']; // Extract idJobOffer from route parameters
     console.log('idJobOffer:', this.idJobOffer); // Log idJobOffer value
     this.getJobOfferById(this.idJobOffer); // Fetch job offer details using idJobOffer
-    this.dancerId = 8;
+    this.dancerId = 1;
   });
 }
 
@@ -53,14 +54,18 @@ addJobApp() {
   formData.append('coverLetter', this.newJobApp.coverLetter);
   formData.append('file', this.userFile);
   console.log('Form Data:', formData);
-
-  this.jobApplicationService.addJobApplication(formData,this.idJobOffer,this.dancerId).subscribe(data => {
-    this.successMessageVisible = true; // Show success message
-    console.log('Form Data:', formData);
-    setTimeout(() => {
-      this.router.navigate(['/listJobApp']);
-    }, 3000); // 3000 milliseconds (3 seconds) delay before redirecting
+  this.ProfileService.getDataFromToken(localStorage.getItem("access_token")).subscribe(response => {
+    console.log(response.id);
+    this.jobApplicationService.addJobApplication(formData,this.idJobOffer,response.id).subscribe(data => {
+      this.successMessageVisible = true; // Show success message
+      console.log('Form Data:', formData);
+      setTimeout(() => {
+        this.router.navigate(['/listJobApp']);
+      }, 3000); // 3000 milliseconds (3 seconds) delay before redirecting
+    });
   });
+
+
 }
 
 onSelectFile(event:any){

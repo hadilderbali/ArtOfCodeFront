@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Candidature } from './candidature';
 import { Observable } from 'rxjs/internal/Observable';
@@ -7,18 +7,25 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class CandidatureService {
-  private baseURL="http://localhost:8081/api/"
+  private baseURL="http://localhost:8089/user/"
   constructor(private httpClient:HttpClient) { }
   addCandidature(competition: Candidature,idcompetition:number): Observable<Object>{
-    return this.httpClient.post(`${this.baseURL}`+`Candidacy/addCandidacy/${idcompetition}/1`, competition);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+    return this.httpClient.post(`${this.baseURL}`+`Candidacy/addCandidacy/${idcompetition}/1`, competition,{headers});
   }
   getcadidaturebyuser(): Observable<string> {
-    return this.httpClient.get<string>(`${this.baseURL}Candidacy/getbyuser/1`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.get<string>(`${this.baseURL}Candidacy/getbyuser/1`,{headers});
   }
   getallcadidature(): Observable<string> {
-    return this.httpClient.get<string>(`${this.baseURL}Candidacy/allCandidacies`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.get<string>(`${this.baseURL}Candidacy/allCandidacies`,{headers});
   }
   updateCompetitionCandidacy(competitionCandidacy: Candidature, id: number): Observable<any> {
-    return this.httpClient.put(`${this.baseURL}Candidacy/updateCompetition/${id}`, competitionCandidacy);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.httpClient.put(`${this.baseURL}Candidacy/updateCompetition/${id}`, competitionCandidacy,{headers});
   }
 }

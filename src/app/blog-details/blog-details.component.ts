@@ -4,7 +4,7 @@ import { BlogService } from '../Services/blog.service';
 import { Blog } from '../Model/Blog';
 import { Observable, Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { ProfileService } from '../Services/profile.service';
 @Component({
   selector: 'app-blog-details',
   templateUrl: './blog-details.component.html',
@@ -26,16 +26,22 @@ export class BlogDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService,
-    private router: Router
+    private router: Router,
+    private ProfileService: ProfileService
   ) {}
 
   ngOnInit(): void {
+    this.ProfileService.getDataFromToken(localStorage.getItem('access_token')).subscribe(response => {
+      console.log(response)
+      this.userId = response.id;
+    })
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
       if (idParam) {
         const blogId = +idParam;
         this.getBlogDetails(blogId);
         this.getRating(blogId);
+        this.getBlogPhotoUrl(blogId);
       }
     });
   }
@@ -92,8 +98,17 @@ export class BlogDetailsComponent implements OnInit, OnDestroy {
     return dateString.replace(/\//g, '-');
   }
 
-  getBlogPhotoUrl(blogId: number): string{
-    return this.blogService.getBlogPhoto(blogId);
+  blogPhotoUrl: any;
+
+  getBlogPhotoUrl(blogId: number) {
+    this.blogService.getBlogPhoto(blogId).subscribe(
+      url => {
+        this.blogPhotoUrl = url;
+      },
+      error => {
+        console.error('Error fetching blog photo URL:', error);
+      }
+    );
   }
 
   async rateBlog(blogId: number, rating: number): Promise<void> {

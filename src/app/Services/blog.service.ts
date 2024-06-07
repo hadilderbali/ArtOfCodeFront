@@ -73,8 +73,21 @@ export class BlogService {
   //     })
   //   );
   // }
-  getBlogPhoto(blogId: number): string {
-    return `${this.baseUrl}/blog/ImgBlog/${blogId}`;
+  getBlogPhoto(blogId: number): Observable<string> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    const url = `${this.baseUrl}/blog/ImgBlog/${blogId}`;
+    console.log(localStorage.getItem('access_token'));
+    // Set responseType to 'blob' because the server is returning binary data
+    const img =  this.httpclient.get(url, { headers, responseType: 'blob' }).pipe(
+      map(blob => URL.createObjectURL(blob)) // Create a Blob URL from the Blob
+    );
+  
+    img.subscribe(blobUrl => console.log(blobUrl)); // Log the actual Blob URL
+  
+    return img;
   }
   addRating(userId: number, blogId: number, rating: number): Observable<any> {
     // Make the POST request with the user ID, blog ID, and rating
@@ -82,7 +95,7 @@ export class BlogService {
       'Authorization',
       `Bearer ${localStorage.getItem('access_token')}`
     );
-    return this.httpclient.post<any>(`http://localhost:8089/api/Rating/add/${userId}/${blogId}/${rating}`, null,{headers});
+    return this.httpclient.post<any>(`http://localhost:8089/user/Rating/add/${userId}/${blogId}/${rating}`, null,{headers});
   }
   getRatingsByBlogId(blogId: number): Observable<Rating[]> {
     const headers = new HttpHeaders().set(
@@ -97,7 +110,7 @@ export class BlogService {
       `Bearer ${localStorage.getItem('access_token')}`
     );
     // Make the GET request with the user ID and blog ID as query parameters
-    return this.httpclient.get<any>(`http://localhost:8089/api/Rating/getpro/${userId}/${blogId}`,{headers});
+    return this.httpclient.get<any>(`http://localhost:8089/user/Rating/getpro/${userId}/${blogId}`,{headers});
   }
   
   

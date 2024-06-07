@@ -34,7 +34,7 @@
   <app-header-front style="z-index: 9999;"></app-header-front>
 <div *ngIf="blog" class="card shadow h-100">
     <div class="card__header">
-      <img [src]="getBlogPhotoUrl(blog.idBlog)" alt="card__image" class="card__image" style="height: 200px; width: 100%; object-fit: cover;">
+      <img [src]="this.blogPhotoUrl" alt="card__image" class="card__image" style="height: 200px; width: 100%; object-fit: cover;">
     </div>
     <div class="card__body">
       <span class="tag tag-blue">{{ blog.blogCategory }}</span>
