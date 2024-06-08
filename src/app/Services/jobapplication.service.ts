@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { JobApplication } from '../Model/JobApplication';
 import { FormGroup } from '@angular/forms';
 import { Page} from '../Model/Page';
@@ -52,12 +52,21 @@ export class JobapplicationService {
     );
     return this.httpClient.get<JobApplication>(`${this.baseUrl}/jobapplication/getJobApp/${idD}`,{headers})
   } 
-  getJobAppPhotoById(idDancer: number): Observable<any> {
+  getJobAppPhotoById(blogId: number): Observable<string> {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('access_token')}`
     );
-    return this.httpClient.get(`${this.baseUrl}/jobapplication/ImgJobApp/${idDancer}`, { responseType: 'blob', headers });
+    const url = `${this.baseUrl}/jobapplication/ImgJobApp/${blogId}`;
+    console.log(localStorage.getItem('access_token'));
+    // Set responseType to 'blob' because the server is returning binary data
+    const img =  this.httpClient.get(url, { headers, responseType: 'blob' }).pipe(
+      map(blob => URL.createObjectURL(blob)) // Create a Blob URL from the Blob
+    );
+  
+    img.subscribe(blobUrl => console.log(blobUrl)); // Log the actual Blob URL
+  
+    return img;
   }
   getJobApplicationsByDancerId(dancerId: number, page: number, size: number): Observable<Page<JobApplication>> {
     const headers = new HttpHeaders().set(

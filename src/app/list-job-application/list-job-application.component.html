@@ -53,7 +53,7 @@
             <td>{{ jobApp.phoneNumberDancer }}</td>
             <!-- Display the image -->
             <td>
-              <img [src]="imageURL[jobApp.idDancer]" height="100" *ngIf="imageURL[jobApp.idDancer]" />
+              <img [src]="this.blogPhotoUrl[jobApp.idDancer]" height="100"  />
             </td>
             <td>{{ jobApp.coverLetter }}</td>
             <td>

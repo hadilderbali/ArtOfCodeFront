@@ -4,7 +4,7 @@ import { JobapplicationService } from '../Services/jobapplication.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Page } from '../Model/Page';
-
+import { ProfileService } from '../Services/profile.service';
 @Component({
   selector: 'app-list-job-application',
   templateUrl: './list-job-application.component.html',
@@ -20,7 +20,7 @@ export class ListJobApplicationComponent implements OnInit {
   isLoading = true;
 
   dancerId: number = 8; 
-  constructor(private jobAppService: JobapplicationService ,private router: Router) { }
+  constructor(private jobAppService: JobapplicationService ,private router: Router,private ProfileService:ProfileService) { }
 
   ngOnInit() {
     this.loadJobApplications();
@@ -28,28 +28,30 @@ export class ListJobApplicationComponent implements OnInit {
 
   private loadJobApplications(): void {
     this.isLoading = true;
-    this.jobAppService.getJobApplicationsByDancerId(this.dancerId, this.currentPage, this.itemsPerPage)
-        .subscribe(
-            (page: Page<JobApplication>) => {
-                this.jobApplications = page.content;
-                this.totalPages = page.totalPages;
-                this.isLoading = false;
-                // Fetch and assign image data for each job application
-                this.jobApplications.forEach(jobApp => {
-                    this.getJobAppPhoto(jobApp.idDancer).subscribe(imageData => {
-                        const imageUrl = URL.createObjectURL(imageData);
-                        this.imageURL[jobApp.idDancer] = imageUrl; // Store image URL by job application ID
-                    });
-                });
+    this.ProfileService.getDataFromToken(localStorage.getItem('access_token')).subscribe((response) => {
+      this.jobAppService.getJobApplicationsByDancerId(response.id, this.currentPage, this.itemsPerPage)
+      .subscribe(
+          (page: Page<JobApplication>) => {
+              this.jobApplications = page.content;
+              this.totalPages = page.totalPages;
+              this.isLoading = false;
+              
+              console.log(page.content)
+              // Fetch and assign image data for each job application
+              this.jobApplications.forEach(jobApp => {
+                  this.getJobAppPhoto(jobApp.idDancer)
+              });
 
-                this.isLoading = false;
-            },
-            error => {
-                // Handle errors
-                console.error('Error loading job applications:', error);
-                this.isLoading = false; // Set to false on error
-            }
-        );
+              this.isLoading = false;
+          },
+          error => {
+              // Handle errors
+              console.error('Error loading job applications:', error);
+              this.isLoading = false; // Set to false on error
+          }
+      );
+    })
+   
 }
 
   goToPage(page: number) {
@@ -70,10 +72,18 @@ export class ListJobApplicationComponent implements OnInit {
       this.loadJobApplications();
     }
   }
-
-    private getJobAppPhoto(id: number): Observable<Blob> {
-      return this.jobAppService.getJobAppPhotoById(id);
-    }
+  blogPhotoUrl: { [id: number]: string } = {};
+  getJobAppPhoto(id: number) {
+    this.jobAppService.getJobAppPhotoById(id).subscribe(
+      url => {
+        this.blogPhotoUrl[id] = url;
+        console.log(url)
+      },
+      error => {
+        console.error('Error fetching blog photo URL:', error);
+      }
+    );
+  }
     generatePageNumbers(): number[] {
       return Array(this.totalPages).fill(0).map((x, i) => i);
     }

@@ -28,6 +28,12 @@ export class AddJobComponent {
  
   constructor(private jobService: JobService,private router:Router, private profileService:ProfileService) {}
   ngOnInit(): void {
+    this.profileService
+  .getDataFromToken(localStorage.getItem('access_token'))
+  .subscribe((response) => {
+   this.recruiterId = response.id
+    }
+  )
     // Start checking for notifications when the component initializes
     this.startCheckingNotifications();
   }
@@ -57,17 +63,7 @@ export class AddJobComponent {
   }
 
   addJobOffer() {
-this.profileService
-  .getDataFromToken(localStorage.getItem('access_token'))
-  .subscribe((response) => {
-    console.log(response);
-this.jobService.addJobOffer(formData,response.id).subscribe(data => {
-      this.successMessage = true; // Show success message
-      setTimeout(() => {
-        this.router.navigate(['/list']);
-      }, 2000); // 3000 milliseconds (3 seconds) delay before redirecting
-    }
-  )});
+
     if (!this.agreeTerms) {
       alert("You must agree to the terms and conditions.");
 
@@ -85,8 +81,6 @@ this.jobService.addJobOffer(formData,response.id).subscribe(data => {
     formData.append('salaryRange', this.newJobOffer.salaryRange.toString());
     formData.append('jobType', this.newJobOffer.jobType);
 
-    
-    // Append the image file
     formData.append('file', this.userFile);
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' })

@@ -38,10 +38,14 @@ this.jobService
   .getJobOffersByUserId(response.id, this.currentPage, this.itemsPerPage)
   .subscribe(
     (page: Page<JobOffer>) => {
-      this.jobOffers = response.jobOffers;
+      this.jobOffers = page.content;
       this.totalPages = page.totalPages;
       this.totalItems = page.totalElements;
       this.isLoading = false;
+      console.log(page.content)
+      page.content.map(job=>{
+        this.getJobPhotoUrl(job.idR)
+      })
     },
     (error) => {
       console.error('Error loading job offers:', error);

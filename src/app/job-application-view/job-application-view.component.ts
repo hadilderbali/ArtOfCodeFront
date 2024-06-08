@@ -47,7 +47,7 @@ ngOnInit(): void {
  this.jobService.getNewJobOffers()
  .pipe(takeUntil(this.unsubscribe$))
  .subscribe((newJobOffer: JobOffer) => {
-  this.getJobAppPhotoUrl(newJobOffer.idR)
+  
    // Check if the new job offer matches the criteria
    if (this.isJobOfferMatched(newJobOffer,this.location,this.keyword)) {
      // Add the new job offer to the list
@@ -167,6 +167,9 @@ public getJobOffers(page: number = 0, size: number = 3): void {
         this.totalPages = page.totalPages; // Update total pages
         this.totalItems = page.totalElements; // Update total items
         this.isLoading = false;
+        page.content.map(j=>{
+          this.getJobAppPhotoUrl(j.idR)
+        })
       },
       error => {
         console.error('Error loading job offers:', error);
