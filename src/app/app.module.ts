@@ -71,6 +71,21 @@ import { CustomFilterPipe } from './Services/custom-filter-pipe.pipe';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { StaticRatingComponent } from './static-rating/static-rating.component';
 import { DatePipe } from '@angular/common';
+import { CreateEventComponent } from './BackOffice/create-event/create-event.component';
+import { EventListComponent } from './FrontOffice/event-list/event-list.component';
+import { BackListComponent } from './BackOffice/back-list/back-list.component';
+import { UpdateEventComponent } from './BackOffice/update-event/update-event.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarPopupComponent } from './FrontOffice/calendar-popup/calendar-popup.component';
+import { CreateClubComponent } from './BackOffice/create-club/create-club.component';
+import { ClubListComponent } from './FrontOffice/club-list/club-list.component';
+import { ClubBackComponent } from './BackOffice/club-back/club-back.component';
+import { CalendarComponent } from './BackOffice/calendar/calendar.component';
+import { UpdateClubComponent } from './BackOffice/update-club/update-club.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { CommonModule } from '@angular/common';
 const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
 
 // Créez une fonction qui renvoie un TranslateHttpLoader pour charger les fichiers de langue
@@ -138,6 +153,17 @@ const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
          BlogViewComponent,
          BlogDetailsComponent,
          StaticRatingComponent,
+         CreateEventComponent,
+         EventListComponent,
+         BackListComponent,
+         UpdateEventComponent,
+         UpdateClubComponent,
+         CalendarPopupComponent,
+         CreateClubComponent,
+         ClubListComponent,
+         ClubBackComponent,
+         CalendarComponent,
+         MessageComponent,
     
   ],
   imports: [
@@ -148,7 +174,12 @@ const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
     ReactiveFormsModule,
     SocketIoModule.forRoot(config),
     NgxPaginationModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    CommonModule ,
+    MatDialogModule,
+    FullCalendarModule,
+
+
      
   ],
   providers: [WebsocketService,DatePipe,CustomFilterPipe],

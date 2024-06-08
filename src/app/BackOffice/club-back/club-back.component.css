@@ -1,0 +1,37 @@
+/* Styles for Club List page */
+
+/* Custom styles for buttons */
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #8B0000; /* Rouge bordeaux */
+    border-color: #8B0000; /* Rouge bordeaux */
+}
+
+/* Custom styles for cards */
+.card {
+    border-color: #8B0000; /* Rouge bordeaux */
+    margin-bottom: 20px;
+}
+
+/* Custom styles for alert message */
+.alert-info {
+    background-color: #8B0000; /* Rouge bordeaux */
+    color: #fff; /* Texte blanc */
+}
+
+/* Custom styles for club name */
+.card-title {
+    color: #8B0000; /* Rouge bordeaux */
+    font-weight: bold;
+}
+
+/* Custom styles for card text */
+.card-text {
+    color: #333; /* Texte noir */
+}
+
+/* Custom styles for update and delete buttons */
+.btn-update, .btn-delete {
+    margin-right: 10px;
+}

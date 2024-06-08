@@ -1,1 +1,95 @@
-<p>message works!</p>
+<body *ngIf="conlogin">
+    <div class="background">
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <form (ngSubmit)="login3()">
+      <label for="param1">Username</label>
+      <input type="text" id="param1" [(ngModel)]="param1" name="param1" required>
+  
+      <label for="param2">Password</label>
+      <input type="password" id="param2" [(ngModel)]="param2" name="param2" required>
+  
+      <button type="submit" id="login">Login</button>
+    </form>
+  
+    <div class="row gutters" *ngIf="conmsg">
+      <div class="col-xl-15 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card m-0">
+          <!-- Row start -->
+          <div class="row no-gutters">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+              <div class="users-container">
+                <div class="chat-search-box">
+                  <div class="input-group" id="recherche">
+                    <input class="form-control" placeholder="Search">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-info">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <ul class="users">
+                  <li class="person" data-chat="person5" *ngFor="let user of users">
+                    <div class="user">
+                      <img [src]="user.userphoto" width="350" height="350" (click)="getCourbyId(user.id)" />
+                      <span class="name"><h5>{{user.firstname}}</h5></span><br>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+  
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+              <div class="page-content page-container" id="page-content">
+                <div class="padding">
+                  <div class="row container d-flex justify-content-center">
+                    <div class="col-md-12">
+                      <div class="card card-bordered" *ngIf="cours">
+                        <div class="card-header">
+                          <h4 class="card-title"><strong>{{cours.firstname}}</strong></h4>
+                          <img [src]="cours.userphoto" width="50" height="50" />
+                          <a class="btn btn-xs btn-secondary" href="#" data-abc="true">Let's Chat App</a>
+                        </div>
+  
+                        <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
+                          <div class="media media-chat">
+                            <img class="avatar" src="assets/img/téléchargement.jpg" alt="Ahmed" width="10" height="1" />
+                            <div class="chat-box" *ngFor="let m of contain2" [ngClass]="{'box text-right': m.sender.id === id, 'box text-left': m.sender.id === cours.id}">
+                              {{m.contenu}}
+                            </div>
+                          </div>
+                        </div>
+  
+                        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+                          <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                        </div>
+                        <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 1px;">
+                          <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 1px;"></div>
+                        </div>
+                      </div>
+  
+                      <div class="publisher bt-1 border-light">
+                        <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
+                        <input class="publisher-input" type="text" placeholder="Write a message..." [(ngModel)]="msg.contenu">
+                        <span class="publisher-btn file-group">
+                          <i class="fa fa-paperclip file-browser"></i>
+                          <input type="file">
+                        </span>
+                        <a class="publisher-btn"><i class="fa fa-smile"></i></a>
+                        <button class="publisher-btn text-info" (click)="add2(msg, cours.id, idsuser)">
+                          <i class="fa fa-paper-plane"></i>Send
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  

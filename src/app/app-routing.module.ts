@@ -45,6 +45,19 @@ import { UpdateblogComponent } from './updateblog/updateblog.component';
 import { BlogViewComponent } from './blog-view/blog-view.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { StaticRatingComponent } from './static-rating/static-rating.component';
+import { CreateEventComponent } from './BackOffice/create-event/create-event.component';
+import { EventListComponent } from './FrontOffice/event-list/event-list.component';
+import { BackListComponent } from './BackOffice/back-list/back-list.component';
+import { UpdateEventComponent } from './BackOffice/update-event/update-event.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarPopupComponent } from './FrontOffice/calendar-popup/calendar-popup.component';
+import { CreateClubComponent } from './BackOffice/create-club/create-club.component';
+import { ClubListComponent } from './FrontOffice/club-list/club-list.component';
+import { ClubBackComponent } from './BackOffice/club-back/club-back.component';
+import { CalendarComponent } from './BackOffice/calendar/calendar.component';
+import { UpdateClubComponent } from './BackOffice/update-club/update-club.component';
+import { MessageComponent } from './message/message.component';
+import { ViewTutorialFrontComponent } from './FrontOffice/view-tutorial-front/view-tutorial-front.component';
 const routes: Routes = [
 
 {
@@ -86,6 +99,7 @@ const routes: Routes = [
  { path: 'blog/:id', component: BlogDetailsComponent },
  {path:'static',component:StaticRatingComponent},
    {path: 'view-tutorial',component:ViewTutorialComponent},
+   {path:"view-tutorial-front",component:ViewTutorialFrontComponent},
    {path:"view-tutorial/add-tutorial",component:AddTutorialComponent},
    {path:'update-tutorial/:id',
    component:UpdateTutorialComponent},
@@ -97,8 +111,27 @@ const routes: Routes = [
    {path: 'statistics-reclamation',
    component:StatisticsReclamationComponent},
 
-  {path: '', redirectTo: 'joboffers',
-   pathMatch: 'full'},
+   
+   {path: 'createClub',
+    component:CreateClubComponent},
+    {path:'pp', component:MessageComponent},
+ 
+    {path: 'club-back',
+    component:ClubBackComponent},
+ 
+    {path: 'clubs',
+    component:ClubListComponent},
+    { path: 'updateClub/:clubId', component: UpdateClubComponent},
+ 
+ { path: 'updateEvent/:idEvent', component: UpdateEventComponent},
+ {path: 'back-list',
+    component:BackListComponent},
+    
+ {path: 'createEvent',
+    component:CreateEventComponent},
+ 
+   {path:'events',
+    component:EventListComponent},
 {
   path:"admin",
   component:AllTemplateBackComponent

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DanceScape Explorer</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/FrontOffice/assets/img/logo.png">
+  <link rel="apple-touch-icon" href="/assets/FrontOffice/assets/img/apple-touch-icon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/FrontOffice/assets/css/main.css" rel="stylesheet">
+
+  <!-- Styles spécifiques pour cette page -->
+  <style>
+    body {
+      background-color: #f8f9fa; /* Fond gris clair */
+      color: #343a40; /* Texte noir */
+    }
+
+    .container {
+      margin-top: 50px; /* Espacement du haut */
+    }
+
+    .card {
+      background-color: #ffffff; /* Fond blanc pour les cartes */
+      color: #343a40; /* Texte noir pour les cartes */
+      border: 1px solid #dee2e6; /* Bordure gris clair */
+      margin-bottom: 20px; /* Espacement entre les cartes */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    }
+
+    .card:hover {
+      transform: translateY(-2px); /* Animation au survol */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée au survol */
+    }
+
+    .btn-primary {
+      background-color: #343a40; /* Fond noir pour les boutons */
+      color: #ffffff; /* Texte blanc pour les boutons */
+      border-color: #343a40; /* Bordure noire pour les boutons */
+    }
+
+    .btn-primary:hover {
+      background-color: #1d2124; /* Fond noir plus foncé au survol */
+      border-color: #1d2124; /* Bordure noire plus foncée au survol */
+    }
+  </style>
+</head>
+
+<body>
+  <app-header-front></app-header-front>
+
+  <!-- Contenu principal -->
+  <div class="container">
+    <h2 class="text-center mb-4">Club List</h2>
+    <div class="row mb-4">
+      <!-- Champ de recherche -->
+      <div class="col-md-6">
+          <label class="small" for="searchClubs">Search Clubs</label>
+          <div class="input-group">
+              <span class="input-group-text" id="searchIcon">
+                  <i class="fas fa-search"></i>
+              </span>
+              <input type="text" id="searchEvents" class="form-control" placeholder="Search clubs..." [(ngModel)]="searchText" (input)="filterClubs()">
+          </div>
+      </div>
+
+      <!-- Champs de prix -->
+      
+  </div>
+  <!-- Fin de la barre de recherche -->
+
+    <!-- Affichage des clubs avec Bootstrap cards -->
+    <div *ngIf="clubs.length === 0" class="alert alert-info">No clubs available.</div>
+    <div *ngFor="let club of filteredClubs| paginate: { itemsPerPage: 3, currentPage: p }" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ club.name }}</h5>
+        <p class="card-text"><strong>President:</strong> {{ club.president }}</p>
+        <p class="card-text"><strong>Objective:</strong> {{ club.objective }}</p>
+        <!-- Bouton de mise à jour stylisé avec une icône -->
+        <a [routerLink]="['/pp']" class="btn btn-primary">Meet Dancers</a>   
+          
+      </div>
+    </div>
+  </div>
+ <!-- Pagination -->
+ <pagination-controls (pageChange)="p = $event"></pagination-controls>
+ <!-- Fin de la pagination -->
+  <!-- Pied de page de l'application -->
+  <app-footer-front></app-footer-front>
+
+  <!-- Scripts JS et autres ressources -->
+  <!-- Vendor JS Files -->
+  <script src="/assets/FrontOffice/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/FrontOffice/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/FrontOffice/assets/js/main.js"></script>
+</body>
+
+</html>

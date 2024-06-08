@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List</title>
+    <link href="/assets/BackOffice/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/assets/BackOffice/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for buttons */
+        .btn-primary,
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #8B0000; /* Rouge bordeaux */
+            border-color: #8B0000; /* Rouge bordeaux */
+        }
+
+        /* Custom styles for table headers */
+        th {
+            background-color: #8B0000; /* Rouge bordeaux */
+            color: #fff; /* Texte blanc */
+        }
+
+        /* Custom styles for table rows */
+        td {
+            color: #333; /* Texte noir */
+        }
+
+        /* Custom styles for update and delete buttons */
+        .btn-update,
+        .btn-delete {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <app-sidebar-back></app-sidebar-back>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <app-navebar-back></app-navebar-back>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <h2 class="text-center mb-4">Event List</h2>
+
+                    <!-- Bouton View Events Calendar -->
+                    <div class="row mb-4">
+                        <div class="col-md-6 offset-md-6 text-end">
+                            <button class="btn btn-outline-danger" (click)="openPopup()">View Events Calendar</button>
+                            <app-calendar-popup *ngIf="isPopupOpen" (closePopupEvent)="closePopup()"></app-calendar-popup>
+                        </div>
+                    </div>
+                    <!-- Fin du bouton View Events Calendar -->
+
+                    <!-- Barre de recherche et filtre de prix -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="🔍 Search events..." [(ngModel)]="searchText" (input)="filterEvents()">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="priceRangeMin" class="d-block">💰 Min:</label>
+                                <input type="number" id="priceRangeMin" class="form-control d-inline-block w-auto mr-2" [(ngModel)]="minPrice" (input)="filterEvents()">
+                                <label for="priceRangeMax" class="d-block">💰 Max:</label>
+                                <input type="number" id="priceRangeMax" class="form-control d-inline-block w-auto" [(ngModel)]="maxPrice" (input)="filterEvents()">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin de la barre de recherche et du filtre de prix -->
+
+                    <!-- Tableau des événements filtrés -->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Event Name</th>
+                                    <th>Description</th>
+                                    <th>City</th>
+                                    <th>Available Tickets</th>
+                                    <th>Ticket Price</th>
+                                    <th>Event Date</th>
+                                    <th>Event Image</th>
+                                    <th>Event Type</th>
+                                    <th>Likes</th>
+                                    <th>DisLikes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let event of filteredEvents | paginate: { itemsPerPage: 3, currentPage: p }">
+                                    <td>{{ event.eventName }}</td>
+                                    <td>{{ event.description }}</td>
+                                    <td>{{ event.city }}</td>
+                                    <td>{{ event.availableTickets }}</td>
+                                    <td>{{ event.ticketPrice }}</td>
+                                    <td>{{ event.eventDate }}</td>
+                                    <td>{{ event.imageE }}</td>
+                                    <td>{{ event.eventType }}</td>
+                                    <td>{{ event.likes }}</td>
+                                    <td>{{ event.dislikes }}</td>
+
+                                    <td>
+                                        <button class="btn btn-primary btn-delete" (click)="removeEvent(event.idEvent)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <button class="btn btn-primary btn-update" (click)="updateEvent(event.idEvent)">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+
+                    <!-- Bouton pour ajouter un événement -->
+                    <div class="text-center mt-4">
+                        <a href="/createEvent" class="btn btn-primary">Add Event</a>
+                    </div>
+                    <!-- Fin du bouton pour ajouter un événement -->
+
+                    <!-- Pagination -->
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <!-- Fin de la pagination -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- Fin du contenu principal -->
+        </div>
+        <!-- Fin du wrapper de contenu -->
+    </div>
+    <!-- Fin du wrapper de la page -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/assets/BackOffice/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/BackOffice/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript -->
+    <script src="/assets/BackOffice/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages -->
+    <script src="/assets/BackOffice/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/assets/BackOffice/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/assets/BackOffice/js/demo/chart-area-demo.js"></script>
+    <script src="/assets/BackOffice/js/demo/chart-pie-demo.js"></script>
+</body>
+
+</html>
