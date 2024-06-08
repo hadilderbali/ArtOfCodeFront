@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Tutorial } from 'src/app/models/tutorial';
-import { TutorialCategory } from 'src/app/models/tutorialCategory';
+import { Tutorial } from 'src/app/Models/tutorial';
+import { TutorialCategory } from 'src/app/Models/tutorialCategory';
 
-import { TutorialService } from 'src/app/services/tutorial.service';
+import { TutorialService } from 'src/app/Services/tutorial.service';
 
 @Component({
   selector: 'app-update-tutorial',

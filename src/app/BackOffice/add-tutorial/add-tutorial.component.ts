@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { TutorialService } from 'src/app/services/tutorial.service';
+import { TutorialService } from 'src/app/Services/tutorial.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Tutorial } from 'src/app/models/tutorial';
+import { Tutorial } from 'src/app/Models/tutorial';
 
 
 @Component({

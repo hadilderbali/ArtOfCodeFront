@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Tutorial } from 'src/app/models/tutorial';
-import { TutorialService } from 'src/app/services/tutorial.service';
-import { Comment } from 'src/app/models/comment';
+import { Tutorial } from 'src/app/Models/tutorial';
+import { TutorialService } from 'src/app/Services/tutorial.service';
+import { Comment } from 'src/app/Models/comment';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 @Component({

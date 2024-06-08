@@ -1,13 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Level } from 'src/app/models/level';
 import { ReclamationCompetition } from 'src/app/Models/reclamationCompetition';
 import { ReclamationCompetitionService } from 'src/app/Services/reclamationCompetition.service';
-import { TutorialService } from 'src/app/services/tutorial.service';
+import { TutorialService } from 'src/app/Services/tutorial.service';
 import { Chart, ChartType, ChartTypeRegistry } from 'chart.js/auto';
 
-
+import { Level } from 'src/app/Models/level';
 @Component({
   selector: 'app-statistics-reclamation',
   templateUrl: './statistics-reclamation.component.html',
