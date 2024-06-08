@@ -52,7 +52,7 @@
     <div class="row">
       <div class="col-md-4 mb-4" *ngFor="let jobOffer of jobOffers">
         <div class="card shadow h-100">
-          <img [src]="jobService.getJobOfferPhoto(jobOffer.idR)" class="card-img-top" alt="Job Offer Image" style="height: 200px; width: 100%; object-fit: cover;">
+          <img [src]="this.jobAppPhotoUrl[jobOffer.idR]" class="card-img-top" alt="Job Offer Image" style="height: 200px; width: 100%; object-fit: cover;">
           <div class="card-body">
             <!-- Catchy title -->
             <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">{{ jobOffer.title }}</h5>

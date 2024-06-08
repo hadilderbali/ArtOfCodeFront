@@ -103,12 +103,21 @@ export class JobService {
       { headers }
     );
   }
-  getJobOfferPhoto(idR: number): string {
-      const headers = new HttpHeaders().set(
-        'Authorization',
-        `Bearer ${localStorage.getItem('access_token')}`
-      );
-    return `${this.baseUrl}/job/ImgJobOffer/${idR}`;
+  getJobOfferPhoto(idR: number): Observable<string> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('access_token')}`
+    );
+    const url = `${this.baseUrl}/job/ImgJobOffer/${idR}`;
+    console.log(localStorage.getItem('access_token'));
+    // Set responseType to 'blob' because the server is returning binary data
+    const img = this.httpClient.get(url, { headers, responseType: 'blob' }).pipe(
+      map((blob: Blob) => URL.createObjectURL(blob)) // Create a Blob URL from the Blob
+    );
+
+    img.subscribe((blobUrl: string) => console.log(blobUrl)); // Log the actual Blob URL
+
+    return img;
   }
   getJobOffersByUserId(
     

@@ -34,7 +34,6 @@ export class UpdateJobComponent implements OnInit{
     this.jobService.getJobOffer(this.jobId).subscribe(
       (jobOffer: JobOffer) => {
         this.jobOffer = jobOffer;
-        this.currentImgURL = this.getJobOfferPhoto(this.jobId);
         this.isEditMode = true; // Set edit mode to true when job offer data is loaded
       },
       (error) => {
@@ -81,8 +80,17 @@ export class UpdateJobComponent implements OnInit{
    formatDate(date: Date): string {
     return this.datePipe.transform(date, 'yyyy-MM-ddTHH:mm:ss.SSSZ')!;
   }
-  getJobOfferPhoto(idR: number): string {
-    return this.jobService.getJobOfferPhoto(idR); // Assuming you have a method in your job service to fetch the image URL based on the job ID
+  jobAppPhotoUrl: { [key: number]: string } = {};
+  getJobOfferPhotoUrl(JobAppId: number) {
+    this.jobService.getJobOfferPhoto(JobAppId).subscribe(
+      url => {
+        this.jobAppPhotoUrl[JobAppId] = url;
+        console.log(url)
+      },
+      error => {
+        console.error('Error fetching JobApp photo URL:', error);
+      }
+    );
   }
  
 }

@@ -30,7 +30,11 @@ export class JobapplicationService {
     return this.httpClient.post(url, formData, { params: { jobOfferId: jobOfferId.toString(), dancerId: dancerId.toString() },headers });
   }
     updateJobApplicationWithoutImage(id: number, updatedJobApplication: JobApplication): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}/jobapplication/update/${id}`, updatedJobApplication, { responseType: 'text' });
+      const headers = new HttpHeaders().set(
+        'Authorization',
+        `Bearer ${localStorage.getItem('access_token')}`
+      );
+    return this.httpClient.put(`${this.baseUrl}/jobapplication/update/${id}`, updatedJobApplication, { responseType: 'text',headers });
   }
   
   
@@ -76,7 +80,7 @@ export class JobapplicationService {
       'Authorization',
       `Bearer ${localStorage.getItem('access_token')}`
     );
-    return this.httpClient.delete(`http://localhost:8082/api/jobapplication/deleteJobApp/${id}`,{headers});
+    return this.httpClient.delete(`http://localhost:8089/user/jobapplication/deleteJobApp/${id}`,{headers});
   }
   getJobApplicationByJobOfferId(jobOfferId: number): Observable<JobApplication> {
     const headers = new HttpHeaders().set(
