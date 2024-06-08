@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ReclamationCompetition } from 'src/app/models/reclamationCompetition';
-import { ReclamationCompetitionService } from 'src/app/services/reclamationCompetition.service';
+import { ReclamationCompetition } from 'src/app/Models/reclamationCompetition';
+import { ReclamationCompetitionService } from 'src/app/Services/reclamationCompetition.service';
 
 @Component({
   selector: 'app-add-reclamation-front',

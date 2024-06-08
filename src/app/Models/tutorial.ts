@@ -1,8 +1,7 @@
-import { Level } from "./level";
-import { Comment } from "./comment";
 import { TutorialCategory } from "./tutorialCategory";
+import { Comment } from "./comment";
 
-
+import { Level } from "./level";
 export class Tutorial {
     tutorialId!: number;
     title!: string;

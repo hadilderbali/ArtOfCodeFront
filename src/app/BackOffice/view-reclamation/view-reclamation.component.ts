@@ -2,11 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { ReclamationCompetition } from 'src/app/models/reclamationCompetition';
-import { ReclamationCompetitionService } from 'src/app/services/reclamationCompetition.service';
+import { ReclamationCompetition } from 'src/app/Models/reclamationCompetition';
+import { ReclamationCompetitionService } from 'src/app/Services/reclamationCompetition.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Chart from 'chart.js/auto';
-import { WebSocketService } from 'src/app/services/WebSocketService';
+import { WebSocketService } from 'src/app/Services/WebSocketService';
 
 import { jsPDF } from 'jspdf';
 

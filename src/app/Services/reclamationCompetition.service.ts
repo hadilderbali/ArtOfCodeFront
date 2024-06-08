@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams ,HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ReclamationCompetition } from '../models/reclamationCompetition';
+import { ReclamationCompetition } from '../Models/reclamationCompetition';
 
 @Injectable({
   providedIn: 'root',
@@ -52,27 +52,39 @@ export class ReclamationCompetitionService {
  
 
   analyzeReclamationSentiment(reclamationId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/analyzeSentiment/${reclamationId}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<any>(`${this.baseUrl}/analyzeSentiment/${reclamationId}`,{headers});
   }
 
   getSentimentStatistics(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}sentiment-statistics`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<any>(`${this.baseUrl}sentiment-statistics`,{headers});
   }
 
   getTotalReclamations(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/total-reclamations`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<number>(`${this.baseUrl}/total-reclamations`,{headers});
   }
   getReclamationsChartData(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/reclamations-chart-data`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<any>(`${this.baseUrl}/reclamations-chart-data`,{headers});
   }
 
   getDecisionForDashboard(): Observable<string> {
-    return this.http.get(`${this.baseUrl}dashboard`, { responseType: 'text' });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get(`${this.baseUrl}dashboard`, { responseType: 'text',headers });
   }
   
   
   exportComplaintsToCSV(): Observable<Blob> {
-    return this.http.get('http://localhost:8081/api/reclamation/export/csv', { responseType: 'blob' });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get('http://localhost:8089/user/api/reclamation/export/csv', { responseType: 'blob' ,headers});
   }
 
 }

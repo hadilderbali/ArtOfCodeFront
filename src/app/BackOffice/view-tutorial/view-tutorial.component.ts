@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Tutorial } from 'src/app/models/tutorial';
-import { TutorialService } from 'src/app/services/tutorial.service';
+import { Tutorial } from 'src/app/Models/tutorial';
+import { TutorialService } from 'src/app/Services/tutorial.service';
 import { Router } from '@angular/router';
 
 

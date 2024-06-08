@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from './user';
@@ -8,24 +8,32 @@ import { WebsocketService } from './websocket.service';
   providedIn: 'root'
 })
 export class NotificationService {
-  private apiUrl = 'http://localhost:8081/api'; 
+  private apiUrl = 'http://localhost:8089/user'; 
 
   constructor(private http: HttpClient,private webSocketService: WebsocketService) {
     
    }
 
    sendNotifications(): Observable<any> {
-    return this.http.get<string>(`${this.apiUrl}/notifications/sendResults`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<string>(`${this.apiUrl}/notifications/sendResults`,{headers});
 
   }
   getAllNotifications(): Observable<Notification[]> {
-    return this.http.get<Notification[]>(`${this.apiUrl}/notifications/getall`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<Notification[]>(`${this.apiUrl}/notifications/getall`,{headers});
   }
   getUserNotifications(userId: number): Observable<Notification[]> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
     const url = `${this.apiUrl}/notifications/getuser/${userId}/notifications`; // Modifiez l'URL pour correspondre à votre API
-    return this.http.get<Notification[]>(url);
+    return this.http.get<Notification[]>(url,{headers});
   }
   getUserById(userId: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/notifications/getuser/2`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<User>(`${this.apiUrl}/notifications/getuser/${userId}`,{headers});
   }
 }

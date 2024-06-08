@@ -55,9 +55,7 @@ export class CandidaturejugeFrontComponent implements OnInit {
     this.candidatureservice.getallcadidature().subscribe(
       (response: any) => {
         this.candidatureList = response;
-
-      
-        
+        console.log(response)
 
         console.log(this.candidatureListExpired);
       },

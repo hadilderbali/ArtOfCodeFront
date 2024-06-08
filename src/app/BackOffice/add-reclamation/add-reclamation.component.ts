@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ReclamationCompetition } from 'src/app/models/reclamationCompetition';
-import { WebSocketService } from 'src/app/services/WebSocketService';
-import { ReclamationCompetitionService } from 'src/app/services/reclamationCompetition.service';
+import { ReclamationCompetition } from 'src/app/Models/reclamationCompetition';
+import { WebSocketService } from 'src/app/Services/WebSocketService';
+import { ReclamationCompetitionService } from 'src/app/Services/reclamationCompetition.service';
 
 @Component({
   selector: 'app-add-reclamation',

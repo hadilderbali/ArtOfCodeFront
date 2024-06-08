@@ -1,7 +1,7 @@
 // message.service.ts
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Message } from './message';
  
@@ -9,17 +9,20 @@ import { Message } from './message';
   providedIn: 'root'
 })
 export class MessageService {
-  private apiUrl = 'http://localhost:8081/api/messages';
-
+  private apiUrl = 'http://localhost:8089/user/messages';
   constructor(private http: HttpClient) { }
 
   getMessagesBetweenUsers(senderId: number, recipientId: number): Observable<Message[]> {
-    return this.http.get<Message[]>(`${this.apiUrl}/${senderId}/${recipientId}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.get<Message[]>(`${this.apiUrl}/${senderId}/${recipientId}`, { headers });
   }
 
 
   sendMessage(message: Message): Observable<Message> {
-    return this.http.post<Message>(this.apiUrl, message);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+
+    return this.http.post<Message>(this.apiUrl, message,{headers});
   }
   private messageUpdateSource = new Subject<void>();
 

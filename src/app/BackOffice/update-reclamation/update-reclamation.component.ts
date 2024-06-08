@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReclamationCompetition } from 'src/app/models/reclamationCompetition';
-import { ReclamationCompetitionService } from 'src/app/services/reclamationCompetition.service';
+import { ReclamationCompetition } from 'src/app/Models/reclamationCompetition';
+import { ReclamationCompetitionService } from 'src/app/Services/reclamationCompetition.service';
 
 @Component({
   selector: 'app-update-reclamation',

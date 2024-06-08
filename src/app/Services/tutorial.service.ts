@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
-import { Tutorial } from '../models/tutorial';
-import { Comment } from '../models/comment';
-import { Level } from '../models/level';
+import { Tutorial } from '../Models/tutorial';
+import { Comment } from '../Models/comment';
+import { Level } from '../Models/level';
 
 @Injectable({
   providedIn: 'root',

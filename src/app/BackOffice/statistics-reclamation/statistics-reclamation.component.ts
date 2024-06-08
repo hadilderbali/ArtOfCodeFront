@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Level } from 'src/app/models/level';
-import { ReclamationCompetition } from 'src/app/models/reclamationCompetition';
-import { ReclamationCompetitionService } from 'src/app/services/reclamationCompetition.service';
+import { ReclamationCompetition } from 'src/app/Models/reclamationCompetition';
+import { ReclamationCompetitionService } from 'src/app/Services/reclamationCompetition.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { Chart, ChartType, ChartTypeRegistry } from 'chart.js/auto';
 
