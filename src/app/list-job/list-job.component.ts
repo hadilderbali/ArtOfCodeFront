@@ -4,6 +4,7 @@ import { JobService } from '../Services/job.service';
 import { Router } from '@angular/router';
 import { Page } from '../Model/Page';
 import { throwError } from 'rxjs';
+import { ProfileService } from '../Services/profile.service';
 
 @Component({
   selector: 'app-list-job',
@@ -11,7 +12,7 @@ import { throwError } from 'rxjs';
   styleUrls: ['./list-job.component.css']
 })
 export class ListJobComponent implements OnInit{
-   jobOffers: JobOffer[] = [];
+   jobOffers: JobOffer[];
   currentPage = 0;
   totalPages = 0;
   itemsPerPage = 3; // Adjust this value as needed
@@ -19,27 +20,36 @@ export class ListJobComponent implements OnInit{
   totalItems = 0;
   userId!: number ;
 
-  constructor(private jobService: JobService, private router: Router) { }
+  constructor(private jobService: JobService, private router: Router, private ProfileService:ProfileService) {
+    this.jobOffers = [];
+   }
 
   ngOnInit() {
-    this.userId = 4
     this.getJobOffers();
   }
 
   private getJobOffers() {
-    this.isLoading = true;
-    this.jobService.getJobOffersByUserId(this.userId, this.currentPage, this.itemsPerPage).subscribe(
-      (page: Page<JobOffer>) => {
-        this.jobOffers = page.content;
-        this.totalPages = page.totalPages;
-        this.totalItems = page.totalElements;
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error('Error loading job offers:', error);
-        this.isLoading = false;
-      }
-    );
+    this.ProfileService.getDataFromToken(
+      localStorage.getItem('access_token')
+      
+    ).subscribe((response) => {
+          this.isLoading = true;
+this.jobService
+  .getJobOffersByUserId(response.id, this.currentPage, this.itemsPerPage)
+  .subscribe(
+    (page: Page<JobOffer>) => {
+      this.jobOffers = response.jobOffers;
+      this.totalPages = page.totalPages;
+      this.totalItems = page.totalElements;
+      this.isLoading = false;
+    },
+    (error) => {
+      console.error('Error loading job offers:', error);
+      this.isLoading = false;
+    }
+  );
+    });
+    
   }
 
   // Pagination methods.

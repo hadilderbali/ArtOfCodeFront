@@ -120,6 +120,7 @@ export class JobService {
         'Authorization',
         `Bearer ${localStorage.getItem('access_token')}`
       );
+
     return this.httpClient.get<Page<JobOffer>>(
       `${this.baseUrl}/job/Page_joboffers/${userId}?page=${page}&size=${size}`,
       { headers }
