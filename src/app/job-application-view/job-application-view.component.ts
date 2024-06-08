@@ -47,6 +47,7 @@ ngOnInit(): void {
  this.jobService.getNewJobOffers()
  .pipe(takeUntil(this.unsubscribe$))
  .subscribe((newJobOffer: JobOffer) => {
+  this.getJobAppPhotoUrl(newJobOffer.idR)
    // Check if the new job offer matches the criteria
    if (this.isJobOfferMatched(newJobOffer,this.location,this.keyword)) {
      // Add the new job offer to the list
@@ -78,6 +79,18 @@ retrieveSearchCriteriaFromCookies(userId: number): void {
     this.location = storedLocation;
     
   }
+}
+jobAppPhotoUrl: { [key: number]: string } = {};
+getJobAppPhotoUrl(JobAppId: number) {
+  this.jobService.getJobOfferPhoto(JobAppId).subscribe(
+    url => {
+      this.jobAppPhotoUrl[JobAppId] = url;
+      console.log(url)
+    },
+    error => {
+      console.error('Error fetching JobApp photo URL:', error);
+    }
+  );
 }
 
 

@@ -85,8 +85,17 @@ export class ListJobComponent implements OnInit{
   navigateToAddjob() {
     this.router.navigate(['/add']);
   }
-  getJobOfferPhoto(idR: number): string {
-    return this.jobService.getJobOfferPhoto(idR);
+  jobAppPhotoUrl: { [key: number]: string } = {};
+  getJobPhotoUrl(JobAppId: number) {
+    this.jobService.getJobOfferPhoto(JobAppId).subscribe(
+      url => {
+        this.jobAppPhotoUrl[JobAppId] = url;
+        console.log(url)
+      },
+      error => {
+        console.error('Error fetching JobApp photo URL:', error);
+      }
+    );
   }
   showJobApplication(jobOfferId: number): void {
     // Redirect to the job application page with the job offer ID as a parameter
