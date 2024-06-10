@@ -19,11 +19,10 @@ export class EventListComponent implements OnInit {
   minPrice: number = 0;
   maxPrice: number = 100;
   isPopupOpen = false;
-
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
-    events: [] // Initial empty array for events
+    events: [] 
   };
 
   constructor(private eventservice: EventService, public dialog: MatDialog) { }
@@ -32,17 +31,15 @@ export class EventListComponent implements OnInit {
     this.eventservice.getEvents().subscribe(
       (events: Event[]) => {
         this.events = events;
-        this.filteredEvents = events; // Initialise les événements filtrés avec tous les événements initialement
+        this.filteredEvents = events; 
         this.updateCalendarEvents(events);
       }
     );
   }
 
   openCalendarPopup(): void {
-    // Ouvrir la fenêtre contextuelle pour afficher le calendrier
     const dialogRef = this.dialog.open(CalendarPopupComponent, {
       width: '600px', // Taille de la fenêtre contextuelle
-      // Autres options de configuration de la fenêtre contextuelle si nécessaire
     });
   }
   openPopup(): void {

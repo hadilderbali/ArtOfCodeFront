@@ -1,85 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title</title>
+    <link href="/assets/BackOffice/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/assets/BackOffice/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
 
-    
-<div class="card">
-  <div class="card-body">
-    <div >
-      <h1 style="text-align: center;">All Tutoriels</h1>
- 
-<table class="table ">
-  
-    <thead class="thead-dark">
-      
-        <tr>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>Durée</th>
-            <th>Vidéo</th>
-            <th>Niveau</th>
-            <th>Categorie</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let tutorial of tutorials | paginate: { itemsPerPage: 3, currentPage: p }">
-            <td>{{tutorial.title}}</td>
-            <td>{{tutorial.description}}</td>
-            <td>{{tutorial.duration}}</td>
-            <td>
-              <video controls class="card-img card-img-top" width="480" height="360">
-                  <source [src]="'assets/videos/' + tutorial.video" type="video/mp4">
-                  Your browser does not support the video tag.
-              </video>
-          </td>
-          
-            <td>{{tutorial.level}}</td>
-            <td>{{tutorial.tutorialCategory}}</td>
-            
-            <td>
-              
-            <span class="button-space1"></span> 
-            
-            <button type="button" (click)="deleteTutorial(tutorial.tutorialId)" class="btn btn-outline-danger mx-2">
-              <i class="fas fa-trash-alt"></i> <!-- Icône de corbeille -->
-          </button>
-                       
+<body id="page-top">
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <app-sidebar-back></app-sidebar-back>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <app-navebar-back></app-navebar-back>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Your Angular router outlet -->
+                    <router-outlet></router-outlet>
+
+                  <!-- create-event.component.html -->
+                  <div class="container mt-5">
                    
-            <button type="button" (click)="update(tutorial.tutorialId)" class="btn btn-outline-success">
-              <i class="fas fa-edit"></i> <!-- Icône de modification -->
-          </button>
+ <div class="card-body" id="content-wrapper">
+  <div>
+    <h1 style="text-align: center">All Tutoriels</h1>
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Titre</th>
+          <th>Description</th>
+          <th>Durée</th>
+          <th>Vidéo</th>
+          <th>Niveau</th>
+          <th>Categorie</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let tutorial of tutorials
+              | paginate : { itemsPerPage: 3, currentPage: p }
+          "
+        >
+          <td>{{ tutorial.title }}</td>
+          <td>{{ tutorial.description }}</td>
+          <td>{{ tutorial.duration }}</td>
+          <td>
+            <video
+              controls
+              class="card-img card-img-top"
+              width="480"
+              height="360"
+            >
+              <source
+                [src]="'assets/videos/' + tutorial.video"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          </td>
+
+          <td>{{ tutorial.level }}</td>
+          <td>{{ tutorial.tutorialCategory }}</td>
+
+          <td>
+            <span class="button-space1"></span>
+
+            <button
+              type="button"
+              (click)="deleteTutorial(tutorial.tutorialId)"
+              class="btn btn-outline-danger mx-2"
+            >
+              <i class="fas fa-trash-alt"></i>
+              <!-- Icône de corbeille -->
+            </button>
+
+            <button
+              type="button"
+              (click)="update(tutorial.tutorialId)"
+              class="btn btn-outline-success"
+            >
+              <i class="fas fa-edit"></i>
+              <!-- Icône de modification -->
+            </button>
           </td>
         </tr>
-    </tbody>
-</table>
-</div>
-<!-- Utilisation d'un bouton <button> au lieu d'un lien <a> -->
-  <button type="button" routerLink="add-tutorial" routerLinkActive="active" class="btn btn-primary custom-gradient-button">
+      </tbody>
+    </table>
+  </div>
+  <!-- Utilisation d'un bouton <button> au lieu d'un lien <a> -->
+  <button
+    type="button"
+    routerLink="add-tutorial"
+    routerLinkActive="active"
+    class="btn btn-primary custom-gradient-button"
+  >
     <b>+</b> Add Tutorial
   </button>
-  
- 
-<!-- Placer la directive pagination-controls à droite de la page -->
-<div style="text-align: right;">
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
-</div>
-<div>
+
+  <!-- Placer la directive pagination-controls à droite de la page -->
+  <div style="text-align: right">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
   <div>
-  <!-- Your Angular router outlet -->
-<router-outlet></router-outlet>
+    <div>
+      <!-- Your Angular router outlet -->
+      <router-outlet></router-outlet>
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- End of Main Content -->
+</div> 
+                   
+                </div>
+                
 
-</div>
-<!-- /.container-fluid -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
 
-</div>
-<!-- End of Main Content -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="/assets/BackOffice/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/BackOffice/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</div>
-<!-- End of Content Wrapper -->
+    <!-- Core plugin JavaScript -->
+    <script src="/assets/BackOffice/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Custom scripts for all pages -->
+    <script src="/assets/BackOffice/js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="/assets/BackOffice/vendor/chart.js/Chart.min.js"></script>
 
+    <!-- Page level custom scripts -->
+    <script src="/assets/BackOffice/js/demo/chart-area-demo.js"></script>
+    <script src="/assets/BackOffice/js/demo/chart-pie-demo.js"></script>
+</body>
 
-
-
+</html>
