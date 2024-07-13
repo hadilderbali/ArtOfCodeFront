@@ -36,15 +36,22 @@ export class LoginComponent implements OnInit {
             console.log("Decoded token", decodedResponse);
             const profile = decodedResponse.profile;
             const role=decodedResponse.role;
+            console.log(role);
             this.id = decodedResponse.id;
             // Redirect based on profile
             if (role=="ADMIN"){
-              this.router.navigate(['/admin'])
-            }else{
-            if (!profile) {
+              this.router.navigate(['/admin']);
+            }
+            if (role=="JUDGE"){
+              this.router.navigate(['/Candidaturejuge']);
+            }
+            else{
+            if (!profile&&role!="ADMIN"&&role!="JUDGE"&&role=="USER") {
               // Profile is null, redirect to create profile page
               this.router.navigate(['/profile']);
-            } else {
+            } else
+            if (profile&&role!="ADMIN"&&role!="JUDGE") 
+             {
               // Profile exists, redirect to profile page
               this.router.navigate(['/']);
             }

@@ -76,7 +76,7 @@ this.tutorialForm.reset();
 
   update(id: number) {
     
-    this.router.navigate(['/admin/update-tutorial', id]); 
+    this.router.navigate(['/update-tutorial', id]); 
 
   }
 

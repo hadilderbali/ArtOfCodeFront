@@ -119,8 +119,8 @@ input[type="text"] {
       <!-- Image -->
       <div class="poster-container">
 
-      <img src="../../../assets/{{event.picture}}" class="card-img card-img-top" alt="course image" >
-    </div>
+        <img [src]="'assets/' + event.picture" class="card-img card-img-top" alt="course image">
+      </div>
 
 
       <div class="card-body pb-0">

@@ -97,18 +97,16 @@ export class TutorialService {
   }
 
   //like and dislike
- likeTutorial(tutorialId: number): Observable<any> {
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
+  likeTutorial(tutorialId: number): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("access_token")}`);
+    return this.http.post(`http://localhost:8089/user/api/v1/tutorial/${tutorialId}/like`, null, { headers });
+  }
 
-  return this.http.post(`http://localhost:8081/api/tutorial/${tutorialId}/like`, {headers});
-}
 
-
-dislikeTutorial(tutorialId: number): Observable<any> {
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
-
-  return this.http.post(`http://localhost:8081/api/tutorial/${tutorialId}/dislike`, {headers});
-}
+  dislikeTutorial(tutorialId: number): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("access_token")}`);
+    return this.http.post(`http://localhost:8089/user/api/v1/tutorial/${tutorialId}/dislike`, null, { headers });
+  }
  //comments
  // Récupérer les vidéos avec les commentaires
  getEventsWithComments(): Observable<Tutorial[]> {

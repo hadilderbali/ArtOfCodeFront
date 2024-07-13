@@ -85,6 +85,7 @@ export class ListCompetitionFrontComponent {
   updatevent(id: number): void {
     this._router.navigate(['/update-event', id])
   }
+
 }
 
 

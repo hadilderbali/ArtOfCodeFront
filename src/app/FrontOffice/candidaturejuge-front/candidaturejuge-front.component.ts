@@ -18,6 +18,8 @@ export class CandidaturejugeFrontComponent implements OnInit {
   candidatureListExpired: Candidature[] = [];
   gradess: Grades = new Grades();
   id!: number;
+  userId1: number=57;
+  userId2: number=1;
   competition!: Competition;
   grades: any[] = [];
   constructor(

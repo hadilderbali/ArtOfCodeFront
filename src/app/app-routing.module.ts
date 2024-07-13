@@ -58,6 +58,7 @@ import { CalendarComponent } from './BackOffice/calendar/calendar.component';
 import { UpdateClubComponent } from './BackOffice/update-club/update-club.component';
 import { MessageComponent } from './message/message.component';
 import { ViewTutorialFrontComponent } from './FrontOffice/view-tutorial-front/view-tutorial-front.component';
+import { AddReclamationFrontComponent } from './FrontOffice/add-reclamation-front/add-reclamation-front.component';
 const routes: Routes = [
 
 {
@@ -99,13 +100,13 @@ const routes: Routes = [
  { path: 'blog/:id', component: BlogDetailsComponent },
  {path:'static',component:StaticRatingComponent},
    {path: 'view-tutorial',component:ViewTutorialComponent},
-   {path:"view-tutorial-front",component:ViewTutorialFrontComponent},
+   {path:'view-tutorial-front',component:ViewTutorialFrontComponent},
    {path:"view-tutorial/add-tutorial",component:AddTutorialComponent},
    {path:'update-tutorial/:id',
    component:UpdateTutorialComponent},
    {path: 'view-reclamation',
    component:ViewReclamationComponent},
-   {path:"view-reclamation/add-reclamation",component:AddReclamationComponent},
+   {path:"add-reclamation-front",component:AddReclamationFrontComponent},
    {path:'update-reclamation/:id',
    component:UpdateReclamationComponent},
    {path: 'statistics-reclamation',

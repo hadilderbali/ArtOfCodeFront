@@ -62,5 +62,4 @@ getEventsPaged(page: number, pageSize: number): Observable<any> {
 
 
 
-
 }

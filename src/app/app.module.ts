@@ -86,6 +86,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { CommonModule } from '@angular/common';
+import { JugeheaderComponent } from './FrontOffice/jugeheader/jugeheader.component';
 const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
 
 // Créez une fonction qui renvoie un TranslateHttpLoader pour charger les fichiers de langue
@@ -164,6 +165,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
          ClubBackComponent,
          CalendarComponent,
          MessageComponent,
+         JugeheaderComponent,
     
   ],
   imports: [
