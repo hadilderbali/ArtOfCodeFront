@@ -7,7 +7,7 @@ import { ReclamationCompetition } from '../Models/reclamationCompetition';
   providedIn: 'root',
 })
 export class ReclamationCompetitionService {
-  private baseUrl: string = 'http://localhost:8089/user/api/v1/reclamation/';
+  private baseUrl: string = 'http://192.168.33.10:8089/user/api/v1/reclamation/';
   webSocketService: any;
   constructor(private http: HttpClient) {}
   getAllReclamations(): Observable<ReclamationCompetition[]> {
@@ -84,7 +84,7 @@ export class ReclamationCompetitionService {
   exportComplaintsToCSV(): Observable<Blob> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${ localStorage.getItem("access_token") }`);
 
-    return this.http.get('http://localhost:8089/user/api/reclamation/export/csv', { responseType: 'blob' ,headers});
+    return this.http.get('http://192.168.33.10:8089/user/api/reclamation/export/csv', { responseType: 'blob' ,headers});
   }
 
 }
