@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class JobService {
   dancerId: number = 9;
-  private baseUrl = 'http://localhost:8089/user'; // Base URL of your backend
+  private baseUrl = 'http://192.168.33.10:8089/user'; // Base URL of your backend
   public dataForm!: FormGroup;
   private newJobOfferSubject: Subject<JobOffer> = new Subject<JobOffer>();
 
