@@ -6,7 +6,7 @@ import { JobOffer } from '../Models/job-offer';
   providedIn: 'root'
 })
 export class JobOfferService {
- private baseURL = "http://localhost:8081/api/job/offer";
+ private baseURL = "http://192.168.33.10:8081/api/job/offer";
   constructor( private httpClient: HttpClient ) { }
   getJobOffers(): Observable<JobOffer[]>{
     return this.httpClient.get<JobOffer[]>(`${this.baseURL}`);
