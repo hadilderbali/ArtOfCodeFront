@@ -28,7 +28,7 @@ export class UserAuthService {
   getDataFromToken(token:string|null){
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     console.log("service",headers)
-    return this.http.post<any>('http://localhost:8089/user/api/v1/auth/decode-token',{},{headers})
+    return this.http.post<any>('http://192.168.33.10:8089/user/api/v1/auth/decode-token',{},{headers})
   }
 
   public clearAuthentication(): void {
