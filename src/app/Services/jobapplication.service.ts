@@ -9,7 +9,7 @@ import { Page} from '../Model/Page';
   providedIn: 'root'
 })
 export class JobapplicationService {
-  private baseUrl = 'http://localhost:8089/user'
+  private baseUrl = 'http://192.168.33.10:8089/user'
 
   private headers = new HttpHeaders().set(
     'Authorization',
@@ -89,7 +89,7 @@ export class JobapplicationService {
       'Authorization',
       `Bearer ${localStorage.getItem('access_token')}`
     );
-    return this.httpClient.delete(`http://localhost:8089/user/jobapplication/deleteJobApp/${id}`,{headers});
+    return this.httpClient.delete(`http://192.168.33.10:8089/user/jobapplication/deleteJobApp/${id}`,{headers});
   }
   getJobApplicationByJobOfferId(jobOfferId: number): Observable<JobApplication> {
     const headers = new HttpHeaders().set(
