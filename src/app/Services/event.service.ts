@@ -12,7 +12,7 @@ export class EventService {
   private selectedDateSubject = new BehaviorSubject<string>(''); // BehaviorSubject pour stocker la date sélectionnée
   selectedDate$ = this.selectedDateSubject.asObservable(); // Observable pour la date sélectionnée
 
-  private baseURL = "http://localhost:8089/user/events/";
+  private baseURL = "http://192.168.33.10:8089/user/events/";
 
   constructor(private http: HttpClient) { 
 
