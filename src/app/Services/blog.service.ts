@@ -95,7 +95,7 @@ export class BlogService {
       'Authorization',
       `Bearer ${localStorage.getItem('access_token')}`
     );
-    return this.httpclient.post<any>(`http://localhost:8089/user/Rating/add/${userId}/${blogId}/${rating}`, null,{headers});
+    return this.httpclient.post<any>(`http://192.168.33.10:8089/user/Rating/add/${userId}/${blogId}/${rating}`, null,{headers});
   }
   getRatingsByBlogId(blogId: number): Observable<Rating[]> {
     const headers = new HttpHeaders().set(
