@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ClubService {
 
-  private baseURL = "http://localhost:8089/user/clubs/";
+  private baseURL = "http://192.168.33.10:8089/user/clubs/";
 
   constructor(private http: HttpClient) { 
   
