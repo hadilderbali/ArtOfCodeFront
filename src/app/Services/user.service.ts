@@ -11,7 +11,7 @@ export class UserService {
   submit(value: any) {
     throw new Error('Method not implemented.');
   }
-  PATH_OF_API="http://localhost:8089";
+  PATH_OF_API="http://192.168.33.10:8089";
   requestHeader=new HttpHeaders({"No-Auth":"True"}
 
   );
@@ -28,22 +28,22 @@ getAllUsers() {
   return this.httpclient.get<any[]>( this.PATH_OF_API+"/user/api/v1/auth/admin/getall");
 }
 getUserFollowerUsers(userId: string | null)  {
-  return this.httpclient.get<any[]>(`http://localhost:8089/user/api/v1/auth/getUserFollowerUsers/${userId}`);
+  return this.httpclient.get<any[]>(`http://192.168.33.10:8089/user/api/v1/auth/getUserFollowerUsers/${userId}`);
 }
 
 followUser(userId: number, followUserId: number) {
-  return this.httpclient.post<any[]>(`http://localhost:8089/user/api/v1/auth/followUser/${userId}/${followUserId}`, {});
+  return this.httpclient.post<any[]>(`http://192.168.33.10:8089/user/api/v1/auth/followUser/${userId}/${followUserId}`, {});
 }
 
 unfollowUser(userId: number, unfollowUserId: number) {
-  return this.httpclient.post<any[]>(`http://localhost:8089/user/api/v1/auth/unfollowUser/${userId}/${unfollowUserId}`, {});
+  return this.httpclient.post<any[]>(`http://192.168.33.10:8089/user/api/v1/auth/unfollowUser/${userId}/${unfollowUserId}`, {});
 }
 
 
 getUserFollowingUsers(userId: number) {
-  return this.httpclient.get<any[]>(`http://localhost:8089/user/api/v1/auth/getUserFollowingUsers/${userId}`);
+  return this.httpclient.get<any[]>(`http://192.168.33.10:8089/user/api/v1/auth/getUserFollowingUsers/${userId}`);
 }
 getUsersSuggested(userId:number){
-  return this.httpclient.get<any[]>(`http://localhost:8089/user/api/v1/auth/getUsersSuggested/${userId}`);
+  return this.httpclient.get<any[]>(`http://192.168.33.10:8089/user/api/v1/auth/getUsersSuggested/${userId}`);
 }
 }
