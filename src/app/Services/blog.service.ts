@@ -9,7 +9,7 @@ import { Page } from '../Model/Page';
   providedIn: 'root'
 })
 export class BlogService {
-  private baseUrl ='http://localhost:8089/user';
+  private baseUrl ='http://192.168.33.10:8089/user';
   constructor(private httpclient: HttpClient) {}
 
   addBlog(blog: FormData, adminId: number): Observable<any> {
